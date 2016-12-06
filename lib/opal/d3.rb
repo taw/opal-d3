@@ -1,9 +1,21 @@
 require "opal"
 
 class D3
-end
+  class << self
+    def min(data, &block)
+      if block
+        `window.d3`.JS.min(data, proc{|x| yield(x)})
+      else
+        `window.d3`.JS.min(data)
+      end
+    end
 
-def d3
-  raise if `window.d3 === undefined`
-  `window.d3`
+    def max(data, &block)
+      if block
+        `window.d3`.JS.max(data, proc{|x| yield(x)})
+      else
+        `window.d3`.JS.max(data)
+      end
+    end
+  end
 end

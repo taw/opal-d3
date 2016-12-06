@@ -11,7 +11,6 @@ describe "D3 coverage" do
         # OK
       else
         skip "not implemented yet"
-
       end
     end
   end
