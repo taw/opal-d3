@@ -20,4 +20,5 @@ end
 require_relative "d3/statistics"
 require_relative "d3/transformations"
 require_relative "d3/histograms"
+require_relative "d3/color"
 require_relative "d3/collections"
