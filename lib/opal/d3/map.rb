@@ -67,10 +67,4 @@ module D3
       }.join(", ")}>"
     end
   end
-
-  class << self
-    def map(object=nil, &block)
-      D3::Map.new(object, &block)
-    end
-  end
 end

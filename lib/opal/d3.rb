@@ -20,6 +20,4 @@ end
 require_relative "d3/statistics"
 require_relative "d3/transformations"
 require_relative "d3/histograms"
-require_relative "d3/objects"
-require_relative "d3/maps"
-require_relative "d3/sets"
+require_relative "d3/collections"
