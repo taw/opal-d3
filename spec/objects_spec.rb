@@ -6,15 +6,15 @@ require 'spec_helper'
 describe "d3-collections - objects" do
   let(:object) { `{a: 1, b: 2, c: 3}` }
 
-  it "#keys" do
+  it "d3.keys" do
     expect(D3.keys(object)).to eq(["a", "b", "c"])
   end
 
-  it "#values" do
+  it "d3.values" do
     expect(D3.values(object)).to eq([1, 2, 3])
   end
 
-  it "#entries" do
+  it "d3.entries" do
     expect(D3.entries(object).map{|x| `JSON.stringify(x)`}).to eq([
        '{"key":"a","value":1}',
        '{"key":"b","value":2}',

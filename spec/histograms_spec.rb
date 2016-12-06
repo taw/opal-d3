@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "d3-array - histograms" do
-  it "#histogram" do
+  it "d3.histogram" do
     expect(D3.histogram).to be_a(D3::Histogram)
   end
 
@@ -46,17 +46,17 @@ describe "d3-array - histograms" do
     ])
   end
 
-  it "#threshold_freedman_diaconis" do
+  it "d3.threshold_freedman_diaconis" do
     data = (0..10).to_a
     expect(D3.threshold_freedman_diaconis(data,0,10)).to eq(3)
   end
 
-  it "#threshold_scott" do
+  it "d3.threshold_scott" do
     data = (0..10).to_a
     expect(D3.threshold_scott(data,0,10)).to eq(2)
   end
 
-  it "#threshold_sturges" do
+  it "d3.threshold_sturges" do
     data = (0..10).to_a
     expect(D3.threshold_sturges(data,0,10)).to eq(5)
   end
