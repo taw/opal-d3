@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe "D3 coverage" do
-  native_methods = `Opal.hash(window.d3)`.keys
+  # Test code is here because opal-repl doesn't support aggregate_failures mode
+  native_methods = `Opal.hash(window.d3)`.keys.sort
   nice_methods = native_methods.map{|m| m.gsub(/([a-z])(?=[A-Z0-9])/, "\\1_").downcase }
 
   # format conflict with base ruby
