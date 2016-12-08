@@ -1,5 +1,7 @@
 describe "d3 - time interval" do
-  let(:a) { Time.at(1481073422.123678) } # 2016-12-07 01:17:02.79
+  let(:a) { Time.at(1481073422.123678) } # 2016-12-07 01:17:02.123678
+  let(:b) { Time.at(1482781833.345345) } # 2016-12-26 19:50:33.345345
+  let(:c) { Time.at(1000000000 )} # 2001-09-09 02:46:40 +0100
 
   it "d3.time_year" do
     expect(D3.time_year.floor(a).to_s).to eq("2016-01-01 00:00:00 -0000")
@@ -117,5 +119,155 @@ describe "d3 - time interval" do
     expect(D3.utc_millisecond.ceil(a).to_s).to eq("2016-12-07 01:17:02 -0000")
     expect(D3.utc_millisecond.floor(a).usec).to eq(123000)
     expect(D3.utc_millisecond.ceil(a).usec).to eq(123000)
+  end
+
+  it "d3.time_years" do
+    expect(D3.time_years(c,a).size).to eq(15)
+    expect(D3.time_years(c,a,2).size).to eq(8)
+  end
+  it "d3.utc_years" do
+    expect(D3.time_years(c,a).size).to eq(15)
+    expect(D3.time_years(c,a,2).size).to eq(8)
+  end
+
+  it "d3.time_months" do
+    expect(D3.time_months(c,a).size).to eq(183)
+    expect(D3.time_months(c,a,12).size).to eq(16)
+  end
+  it "d3.utc_months" do
+    expect(D3.time_months(c,a).size).to eq(183)
+    expect(D3.time_months(c,a,12).size).to eq(16)
+  end
+
+  it "d3.time_mondays" do
+    expect(D3.time_mondays(a,b).map(&:to_s)).to eq([
+      "2016-12-12 00:00:00 -0000", "2016-12-19 00:00:00 -0000", "2016-12-26 00:00:00 -0000"
+    ])
+  end
+  it "d3.utc_mondays" do
+    expect(D3.utc_mondays(a,b).map(&:to_s)).to eq([
+      "2016-12-12 00:00:00 -0000", "2016-12-19 00:00:00 -0000", "2016-12-26 00:00:00 -0000"
+    ])
+  end
+
+  it "d3.time_tuesdays" do
+    expect(D3.time_tuesdays(a,b).map(&:to_s)).to eq([
+      "2016-12-13 00:00:00 -0000", "2016-12-20 00:00:00 -0000"
+    ])
+  end
+  it "d3.utc_tuesdays" do
+    expect(D3.utc_tuesdays(a,b).map(&:to_s)).to eq([
+      "2016-12-13 00:00:00 -0000", "2016-12-20 00:00:00 -0000"
+    ])
+  end
+
+  it "d3.time_wednesdays" do
+    expect(D3.time_wednesdays(a,b).map(&:to_s)).to eq([
+      "2016-12-14 00:00:00 -0000", "2016-12-21 00:00:00 -0000"
+    ])
+  end
+  it "d3.utc_wednesdays" do
+    expect(D3.utc_wednesdays(a,b).map(&:to_s)).to eq([
+      "2016-12-14 00:00:00 -0000", "2016-12-21 00:00:00 -0000"
+    ])
+  end
+
+  it "d3.time_thursdays" do
+    expect(D3.time_thursdays(a,b).map(&:to_s)).to eq([
+      "2016-12-08 00:00:00 -0000", "2016-12-15 00:00:00 -0000", "2016-12-22 00:00:00 -0000"
+    ])
+  end
+  it "d3.utc_thursdays" do
+    expect(D3.utc_thursdays(a,b).map(&:to_s)).to eq([
+      "2016-12-08 00:00:00 -0000", "2016-12-15 00:00:00 -0000", "2016-12-22 00:00:00 -0000"
+    ])
+  end
+
+  it "d3.time_fridays" do
+    expect(D3.time_fridays(a,b).map(&:to_s)).to eq([
+      "2016-12-09 00:00:00 -0000", "2016-12-16 00:00:00 -0000", "2016-12-23 00:00:00 -0000"
+    ])
+  end
+  it "d3.utc_fridays" do
+    expect(D3.utc_fridays(a,b).map(&:to_s)).to eq([
+      "2016-12-09 00:00:00 -0000", "2016-12-16 00:00:00 -0000", "2016-12-23 00:00:00 -0000"
+    ])
+  end
+
+  it "d3.time_saturdays" do
+    expect(D3.time_saturdays(a,b).map(&:to_s)).to eq([
+      "2016-12-10 00:00:00 -0000", "2016-12-17 00:00:00 -0000", "2016-12-24 00:00:00 -0000"
+    ])
+  end
+  it "d3.utc_saturdays" do
+    expect(D3.utc_saturdays(a,b).map(&:to_s)).to eq([
+      "2016-12-10 00:00:00 -0000", "2016-12-17 00:00:00 -0000", "2016-12-24 00:00:00 -0000"
+    ])
+  end
+
+  it "d3.time_sundays" do
+    expect(D3.time_sundays(a,b).map(&:to_s)).to eq([
+      "2016-12-11 00:00:00 -0000", "2016-12-18 00:00:00 -0000", "2016-12-25 00:00:00 -0000"
+    ])
+  end
+  it "d3.utc_sundays" do
+    expect(D3.utc_sundays(a,b).map(&:to_s)).to eq([
+      "2016-12-11 00:00:00 -0000", "2016-12-18 00:00:00 -0000", "2016-12-25 00:00:00 -0000"
+    ])
+  end
+
+  it "d3.time_weeks" do
+    expect(D3.time_weeks(a,b).map(&:to_s)).to eq([
+      "2016-12-11 00:00:00 -0000", "2016-12-18 00:00:00 -0000", "2016-12-25 00:00:00 -0000"
+    ])
+  end
+  it "d3.utc_weeks" do
+    expect(D3.utc_weeks(a,b).map(&:to_s)).to eq([
+      "2016-12-11 00:00:00 -0000", "2016-12-18 00:00:00 -0000", "2016-12-25 00:00:00 -0000"
+    ])
+  end
+
+  it "d3.time_hours" do
+    expect(D3.time_hours(a,a+10000).map(&:to_s)).to eq([
+      "2016-12-07 02:00:00 -0000", "2016-12-07 03:00:00 -0000", "2016-12-07 04:00:00 -0000"
+    ])
+  end
+  it "d3.utc_hours" do
+    expect(D3.utc_hours(a,a+10000).map(&:to_s)).to eq([
+      "2016-12-07 02:00:00 -0000", "2016-12-07 03:00:00 -0000", "2016-12-07 04:00:00 -0000"
+    ])
+  end
+
+  it "d3.time_minutes" do
+    expect(D3.time_minutes(a,a+200).map(&:to_s)).to eq([
+      "2016-12-07 01:18:00 -0000", "2016-12-07 01:19:00 -0000", "2016-12-07 01:20:00 -0000"
+    ])
+  end
+  it "d3.utc_minutes" do
+    expect(D3.utc_minutes(a,a+200).map(&:to_s)).to eq([
+      "2016-12-07 01:18:00 -0000", "2016-12-07 01:19:00 -0000", "2016-12-07 01:20:00 -0000"
+    ])
+  end
+
+  it "d3.time_seconds" do
+    expect(D3.time_seconds(a,a+3).map(&:to_s)).to eq([
+      "2016-12-07 01:17:03 -0000", "2016-12-07 01:17:04 -0000", "2016-12-07 01:17:05 -0000"
+    ])
+  end
+  it "d3.utc_seconds" do
+    expect(D3.utc_seconds(a,a+3).map(&:to_s)).to eq([
+      "2016-12-07 01:17:03 -0000", "2016-12-07 01:17:04 -0000", "2016-12-07 01:17:05 -0000"
+    ])
+  end
+
+  it "d3.time_milliseconds" do
+    expect(D3.time_milliseconds(a,a+0.004).map(&:tv_usec)).to eq([
+      123000, 124000, 125000, 126000
+    ])
+  end
+  it "d3.utc_milliseconds" do
+    expect(D3.utc_milliseconds(a,a+0.004).map(&:tv_usec)).to eq([
+      123000, 124000, 125000, 126000
+    ])
   end
 end

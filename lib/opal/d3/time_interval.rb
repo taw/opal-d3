@@ -3,22 +3,20 @@ require "native"
 
 module D3
   class TimeInterval
+    include Native
     def initialize(native)
       raise unless native
       @native = native
     end
 
-    def round(date)
-      @native.JS.round(date)
-    end
-
-    def floor(date)
-      @native.JS.floor(date)
-    end
-
-    def ceil(date)
-      @native.JS.ceil(date)
-    end
+    alias_native :round
+    alias_native :floor
+    alias_native :ceil
+    alias_native :offset 
+    alias_native :range
+    alias_native :filter
+    alias_native :every
+    alias_native :count
   end
 
   class << self
@@ -52,5 +50,36 @@ module D3
     def utc_second; D3::TimeInterval.new(`window.d3.utcSecond`); end
     def time_millisecond; D3::TimeInterval.new(`window.d3.timeMillisecond`); end
     def utc_millisecond; D3::TimeInterval.new(`window.d3.utcMillisecond`); end
+
+    alias_d3 :time_years, :timeYears
+    alias_d3 :utc_years, :utcYears
+    alias_d3 :time_milliseconds, :timeMilliseconds
+    alias_d3 :utc_milliseconds, :utcMilliseconds
+    alias_d3 :time_seconds, :timeSeconds
+    alias_d3 :utc_seconds, :utcSeconds
+    alias_d3 :time_minutes, :timeMinutes
+    alias_d3 :utc_minutes, :utcMinutes
+    alias_d3 :time_hours, :timeHours
+    alias_d3 :utc_hours, :utcHours
+    alias_d3 :time_days, :timeDays
+    alias_d3 :utc_days, :utcDays
+    alias_d3 :time_weeks, :timeWeeks
+    alias_d3 :utc_weeks, :utcWeeks
+    alias_d3 :time_sundays, :timeSundays
+    alias_d3 :utc_sundays, :utcSundays
+    alias_d3 :time_mondays, :timeMondays
+    alias_d3 :utc_mondays, :utcMondays
+    alias_d3 :time_tuesdays, :timeTuesdays
+    alias_d3 :utc_tuesdays, :utcTuesdays
+    alias_d3 :time_wednesdays, :timeWednesdays
+    alias_d3 :utc_wednesdays, :utcWednesdays
+    alias_d3 :time_thursdays, :timeThursdays
+    alias_d3 :utc_thursdays, :utcThursdays
+    alias_d3 :time_fridays, :timeFridays
+    alias_d3 :utc_fridays, :utcFridays
+    alias_d3 :time_saturdays, :timeSaturdays
+    alias_d3 :utc_saturdays, :utcSaturdays
+    alias_d3 :time_months, :timeMonths
+    alias_d3 :utc_months, :utcMonths
   end
 end
