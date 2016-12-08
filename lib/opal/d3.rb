@@ -17,10 +17,11 @@ module D3
   end
 end
 
-require_relative "d3/statistics"
-require_relative "d3/transformations"
-require_relative "d3/histograms"
-require_relative "d3/color"
 require_relative "d3/collections"
+require_relative "d3/color"
 require_relative "d3/ease"
+require_relative "d3/histograms"
+require_relative "d3/misc"
+require_relative "d3/statistics"
 require_relative "d3/time_interval"
+require_relative "d3/transformations"
