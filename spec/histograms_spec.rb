@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "d3-array - histograms" do
   it "d3.histogram" do
     expect(D3.histogram).to be_a(D3::Histogram)

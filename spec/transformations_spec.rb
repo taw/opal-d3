@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "d3-array - transformations" do
   it "d3.merge" do
     expect(D3.merge([[1], [2, 3]])).to eq([1, 2, 3])

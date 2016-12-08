@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "d3-collections - sets" do
   it "d3.set" do
     expect(D3.set).to be_instance_of(D3::Set)

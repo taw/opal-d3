@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "d3-array - statistics" do
   it "d3.min" do
     expect(D3.min([2,1,3])).to eq(1)

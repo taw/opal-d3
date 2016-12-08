@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "d3-colors" do
   it "d3.color" do
     expect(D3.color("blue")).to be_instance_of(D3::Color)

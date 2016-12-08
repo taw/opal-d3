@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "D3 coverage" do
   # Test code is here because opal-repl doesn't support aggregate_failures mode
   native_methods = `Opal.hash(window.d3)`.keys.sort

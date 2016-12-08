@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "d3-collections - maps" do
   it "d3.map" do
     expect(D3.map).to be_instance_of(D3::Map)

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 # These operate on JS native objects, and might not be that useful from Opal
 # Not converting these to work on ruby objects, as ruby standard library
 # already has all relevant methods

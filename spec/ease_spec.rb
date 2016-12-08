@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe "d3-ease" do
   let(:range) { (0..20).map{|x| x / 20 }}
   let(:curve) { range.map{|t| D3.send(ease, t).round(4) }}
