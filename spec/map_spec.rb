@@ -50,10 +50,12 @@ describe "d3-collections - maps" do
 
   it "map.entries" do
     a = D3.map.set("foo", 1).set("bar", 2)
-    expect(a.entries.map{|x| `JSON.stringify(x)`}).to eq([
-      '{"key":"foo","value":1}',
-      '{"key":"bar","value":2}',
-    ])
+    expect(a.entries).to eq([["foo", 1], ["bar", 2]])
+  end
+
+  it "map.to_h" do
+    a = D3.map.set("foo", 1).set("bar", 2)
+    expect(a.to_h).to eq({"foo" => 1, "bar" => 2})
   end
 
   it "map.each" do

@@ -1,13 +1,8 @@
 module D3
   class Map
-    def initialize(object=nil)
-      if block_given?
-        @native = `window.d3`.JS.map(object, proc{|x| yield(x)})
-      elsif object
-        @native = `window.d3`.JS.map(object)
-      else
-        @native = `window.d3`.JS.map()
-      end
+    def initialize(native)
+      raise unless native
+      @native = native
     end
 
     def has?(key)
@@ -45,9 +40,15 @@ module D3
     end
 
     def entries
-      @native.JS.entries()
+      @native.JS.entries().map{|o| [`o.key`, `o.value`]}
     end
 
+    def to_h
+      `Opal.hash(#{entries})`
+    end
+
+    # Should that be reversed to better match ruby and to work with Enumerable?
+    # Or just use #to_h if you want ruby interface?
     def each(&block)
       @native.JS.each(block)
       self
@@ -62,9 +63,19 @@ module D3
     end
 
     def inspect
-      "#<D3::Map: {#{ entries.map{|o|
-        "#{o.key} => #{o.value}"
-      }.join(", ")}>"
+      "#<D3::Map: #{ to_h.inspect }>"
+    end
+  end
+
+  class << self
+    def map(object=nil, &block)
+      if block_given?
+        D3::Map.new(@d3.JS.map(object, proc{|x| yield(x)}))
+      elsif object
+        D3::Map.new(@d3.JS.map(object))
+      else
+        D3::Map.new(@d3.JS.map())
+      end
     end
   end
 end

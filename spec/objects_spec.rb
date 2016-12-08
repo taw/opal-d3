@@ -13,10 +13,10 @@ describe "d3-collections - objects" do
   end
 
   it "d3.entries" do
-    expect(D3.entries(object).map{|x| `JSON.stringify(x)`}).to eq([
-       '{"key":"a","value":1}',
-       '{"key":"b","value":2}',
-       '{"key":"c","value":3}',
+    expect(D3.entries(object)).to eq([
+       ["a",1],
+       ["b",2],
+       ["c",3],
     ])
   end
 end

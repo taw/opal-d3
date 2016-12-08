@@ -50,4 +50,10 @@ module D3
       "#<D3::Set: {#{ values.join(", ") }}>"
     end
   end
+
+  class << self
+    def set(array=nil, &block)
+      D3::Set.new(array, &block)
+    end
+  end
 end
