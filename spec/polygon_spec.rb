@@ -37,7 +37,6 @@ describe "d3 - polygon" do
 
   it "d3.polygon_hull" do
     hull = D3.polygon_hull(random_points)
-    p hull
     hull.each do |pt|
       expect(random_points).to include(pt)
     end
