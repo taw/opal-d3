@@ -1,5 +1,6 @@
 require_relative "map"
 require_relative "set"
+require_relative "nest"
 
 module D3
   class << self
