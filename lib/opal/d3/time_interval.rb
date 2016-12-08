@@ -12,11 +12,17 @@ module D3
     alias_native :round
     alias_native :floor
     alias_native :ceil
-    alias_native :offset 
+    alias_native :offset
     alias_native :range
-    alias_native :filter
-    alias_native :every
     alias_native :count
+
+    def every(step)
+      D3::TimeInterval.new(@native.JS.every(step))
+    end
+
+    def filter(&block)
+      D3::TimeInterval.new(@native.JS.filter(block))
+    end
   end
 
   class << self

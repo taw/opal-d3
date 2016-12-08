@@ -3,6 +3,37 @@ describe "d3 - time interval" do
   let(:b) { Time.at(1482781833.345345) } # 2016-12-26 19:50:33.345345
   let(:c) { Time.at(1000000000 )} # 2001-09-09 02:46:40 +0100
 
+  it "time_interval.offset" do
+    expect(D3.time_year.offset(a).to_s).to eq("2017-12-07 01:17:02 -0000")
+    expect(D3.time_year.offset(a, 10).to_s).to eq("2026-12-07 01:17:02 -0000")
+  end
+
+  it "time_interval.range" do
+    expect(D3.time_day.range(a, a+3*24*3600).map(&:to_s)).to eq([
+      "2016-12-08 00:00:00 -0000", "2016-12-09 00:00:00 -0000", "2016-12-10 00:00:00 -0000"
+    ])
+    expect(D3.time_day.range(a, b, 5).map(&:to_s)).to eq([
+      "2016-12-08 00:00:00 -0000", "2016-12-13 00:00:00 -0000", "2016-12-18 00:00:00 -0000", "2016-12-23 00:00:00 -0000"
+    ])
+  end
+
+  # It's not same as passing step to range
+  it "time_interval.every" do
+    expect(D3.time_day.every(5).range(a, b).map(&:to_s)).to eq([
+      "2016-12-11 00:00:00 -0000", "2016-12-16 00:00:00 -0000", "2016-12-21 00:00:00 -0000", "2016-12-26 00:00:00 -0000"
+    ])
+  end
+
+  it "time_interval.filter" do
+    expect(D3.time_day.filter{|d| d.day % 5 == 1}.range(a, b).map(&:to_s)).to eq([
+      "2016-12-11 00:00:00 -0000", "2016-12-16 00:00:00 -0000", "2016-12-21 00:00:00 -0000", "2016-12-26 00:00:00 -0000"
+    ])
+  end
+
+  it "time_interval.count" do
+    expect(D3.time_day.count(a, b)).to eq(19)
+  end
+
   it "d3.time_year" do
     expect(D3.time_year.floor(a).to_s).to eq("2016-01-01 00:00:00 -0000")
     expect(D3.time_year.round(a).to_s).to eq("2017-01-01 00:00:00 -0000")
