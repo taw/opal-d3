@@ -24,6 +24,10 @@ describe "d3-collections - nests" do
       ["5", [58, 57, 55]],
       ["6", [61]],
     ])
+    o = nest.object(data)
+    expect(`JSON.stringify(#{o})`).to eq(
+      '{"0":[9],"2":[24,20],"3":[37,35],"4":[42],"5":[58,57,55],"6":[61]}'
+    )
   end
 
   it "one level and rollup" do

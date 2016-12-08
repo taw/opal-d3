@@ -44,7 +44,7 @@ module D3
       self
     end
 
-    # This is really attrocious...
+    # This is really attrocious, why don't we just return nested hash?
     def map(array)
       result = @native.JS.map(array)
       map_map(result, @depth)
@@ -53,6 +53,10 @@ module D3
     def entries(array)
       result = @native.JS.entries(array)
       map_entries(result, @depth)
+    end
+
+    def object(array)
+      @native.JS.object(array)
     end
 
     def rollup(&block)
