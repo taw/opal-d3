@@ -36,6 +36,15 @@ module D3
     def select_all(selector)
       Selection.new @native.JS.selectAll(selector)
     end
+
+    def style(name, value=`undefined`, priority=`undefined`)
+      if `value === undefined`
+        @native.JS.style(name)
+      else
+        value = `value === nil ? null : value`
+        Selection.new @native.JS.style(name, value, priority)
+      end
+    end
   end
 
   class << self

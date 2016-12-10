@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version      = Opal::D3::VERSION
   s.author       = "Tomasz Wegrzanowski"
   s.email        = "Tomasz.Wegrzanowski@gmail.com"
-  #s.homepage     =
+  s.homepage     = "https://github.com/taw/opal-d3"
   s.summary      = "Ruby bindings for D3"
   s.description  = "Opal wrapper library for D3 library"
 
@@ -15,6 +15,6 @@ Gem::Specification.new do |s|
   s.require_paths  = ["lib"]
 
   s.add_runtime_dependency "opal", "~> 0.10.0"
-  s.add_development_dependency "opal-rspec"
-  s.add_development_dependency "rake"
+  s.add_development_dependency "opal-rspec", ">= 0.6.0"
+  s.add_development_dependency "rake", ">= 11.3.0"
 end
