@@ -1,4 +1,18 @@
 module D3
+  class EasePoly
+    def initialize(native)
+      @native = native
+    end
+
+    def exponent(e)
+      D3::EasePoly.new @native.JS.exponent(e)
+    end
+
+    def call(t)
+      @native.call(t)
+    end
+  end
+
   class <<self
     def ease_linear(t=nil)
       if t
@@ -197,6 +211,30 @@ module D3
         @d3.JS.easeBounceInOut(t)
       else
         `#@d3.easeBounceInOut`
+      end
+    end
+
+    def ease_poly_in(t=nil)
+      if t
+        @d3.JS.easePolyIn(t)
+      else
+        D3::EasePoly.new `#@d3.easePolyIn`
+      end
+    end
+
+    def ease_poly_out(t=nil)
+      if t
+        @d3.JS.easePolyOut(t)
+      else
+        D3::EasePoly.new `#@d3.easePolyOut`
+      end
+    end
+
+    def ease_poly_in_out(t=nil)
+      if t
+        @d3.JS.easePolyInOut(t)
+      else
+        D3::EasePoly.new `#@d3.easePolyInOut`
       end
     end
   end
