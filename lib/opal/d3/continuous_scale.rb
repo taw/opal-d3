@@ -1,5 +1,6 @@
 module D3
   class ContinuousScale
+    include Native
     def initialize(native)
       raise unless native
       @native = native
@@ -48,6 +49,9 @@ module D3
     def copy
       self.class.new @native.JS.copy
     end
+
+    alias_native :ticks
+    alias_native :tick_format, :tickFormat
   end
 
   class PowScale < ContinuousScale
@@ -56,6 +60,16 @@ module D3
         self.class.new @native.JS.exponent(e)
       else
         @native.JS.exponent
+      end
+    end
+  end
+
+  class LogScale < ContinuousScale
+    def base(b=nil)
+      if b
+        self.class.new @native.JS.base(b)
+      else
+        @native.JS.base
       end
     end
   end
@@ -71,6 +85,10 @@ module D3
 
     def scale_linear
       D3::ContinuousScale.new @d3.JS.scaleLinear
+    end
+
+    def scale_log
+      D3::LogScale.new @d3.JS.scaleLog
     end
   end
 end

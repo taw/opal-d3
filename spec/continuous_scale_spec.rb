@@ -53,6 +53,14 @@ describe "d3 - continuous scale" do
       expect(color.(+0.5)).to eq("rgb(128, 192, 128)")
       expect(color.(1)).to eq("rgb(0, 128, 0)")
     end
+
+    it ".ticks / .tick_format" do
+      x = D3.scale_linear().domain([-1, 1]).range([0, 960])
+      expect(x.ticks(5)).to eq([-1, -0.5, 0, 0.5, 1])
+      expect(x.ticks.map{|v| v.round(2)}).to eq([-1, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1])
+      tick_format = x.tick_format(5, "+%")
+      expect(x.ticks(5).map(&tick_format)).to eq(["-100%", "-50%", "+0%", "+50%", "+100%"])
+    end
   end
 
   describe "pow" do
@@ -60,12 +68,31 @@ describe "d3 - continuous scale" do
       expect(D3.scale_pow).to be_instance_of(D3::PowScale)
       expect(D3.scale_pow.exponent).to eq(1)
     end
+
+    it "basics" do
+      x = D3.scale_pow.exponent(2).domain([0, 10]).range([0, 10000])
+      expect(x.(5)).to eq(2500)
+      expect(x.invert(4900)).to eq(7)
+    end
   end
 
   describe "sqrt" do
     it "d3.scale_sqrt" do
       expect(D3.scale_sqrt).to be_instance_of(D3::PowScale)
       expect(D3.scale_sqrt.exponent).to eq(0.5)
+    end
+  end
+
+  describe "log" do
+    it 'd3.scale_log' do
+      expect(D3.scale_log).to be_instance_of(D3::LogScale)
+      expect(D3.scale_log.base).to eq(10)
+    end
+
+    it "basics" do
+      x = D3.scale_log.base(2).domain([1, 1024]).range([0, 100])
+      expect(x.(256)).to eq(80)
+      expect(x.invert(50)).to eq(32)
     end
   end
 end
