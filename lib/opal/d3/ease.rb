@@ -13,6 +13,20 @@ module D3
     end
   end
 
+  class EaseBack
+    def initialize(native)
+      @native = native
+    end
+
+    def overshoot(s)
+      D3::EaseBack.new @native.JS.overshoot(s)
+    end
+
+    def call(t)
+      @native.call(t)
+    end
+  end
+
   class <<self
     def ease_linear(t=nil)
       if t
@@ -237,5 +251,38 @@ module D3
         D3::EasePoly.new `#@d3.easePolyInOut`
       end
     end
+
+    def ease_back(t=nil)
+      if t
+        @d3.JS.easeBack(t)
+      else
+        D3::EaseBack.new `#@d3.easeBack`
+      end
+    end
+
+    def ease_back_in(t=nil)
+      if t
+        @d3.JS.easeBackIn(t)
+      else
+        D3::EaseBack.new `#@d3.easeBackIn`
+      end
+    end
+
+    def ease_back_out(t=nil)
+      if t
+        @d3.JS.easeBackOut(t)
+      else
+        D3::EaseBack.new `#@d3.easeBackOut`
+      end
+    end
+
+    def ease_back_in_out(t=nil)
+      if t
+        @d3.JS.easeBackInOut(t)
+      else
+        D3::EaseBack.new `#@d3.easeBackInOut`
+      end
+    end
+
   end
 end

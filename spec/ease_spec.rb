@@ -248,4 +248,63 @@ describe "d3-ease" do
     end
   end
 
+  describe "d3.ease_back_in" do
+    let(:ease) { :ease_back_in }
+    it do
+      expect(curve).to eq(curve_f)
+      expect(curve).to eq([0, -0.0039, -0.0143, -0.0292, -0.0465, -0.0641, -0.0802, -0.0926, -0.0994, -0.0984, -0.0877, -0.0653, -0.029, 0.023, 0.0929, 0.1826, 0.2942, 0.4297, 0.5912, 0.7806, 1])
+    end
+
+    describe "custom overshoot" do
+      let(:f) { D3.send(ease).overshoot(4) }
+      it do
+        expect(curve_f).to eq([0, -0.0094, -0.035, -0.0731, -0.12, -0.1719, -0.225, -0.2756, -0.32, -0.3544, -0.375, -0.3781, -0.36, -0.3169, -0.245, -0.1406, 0, 0.1806, 0.405, 0.6769, 1])
+      end
+    end
+  end
+
+  describe "d3.ease_back_out" do
+    let(:ease) { :ease_back_out }
+    it do
+      expect(curve).to eq(curve_f)
+      expect(curve).to eq([0, 0.2194, 0.4088, 0.5703, 0.7058, 0.8174, 0.9071, 0.977, 1.029, 1.0653, 1.0877, 1.0984, 1.0994, 1.0926, 1.0802, 1.0641, 1.0465, 1.0292, 1.0143, 1.0039, 1])
+    end
+
+    describe "custom overshoot" do
+      let(:f) { D3.send(ease).overshoot(4) }
+      it do
+        expect(curve_f).to eq([0, 0.3231, 0.595, 0.8194, 1, 1.1406, 1.245, 1.3169, 1.36, 1.3781, 1.375, 1.3544, 1.32, 1.2756, 1.225, 1.1719, 1.12, 1.0731, 1.035, 1.0094, 1])
+      end
+    end
+  end
+
+  describe "d3.ease_back" do
+    let(:ease) { :ease_back }
+    it do
+      expect(curve).to eq(curve_f)
+      expect(curve).to eq([0, -0.0072, -0.0232, -0.0401, -0.0497, -0.0438, -0.0145, 0.0464, 0.1471, 0.2956, 0.5, 0.7044, 0.8529, 0.9536, 1.0145, 1.0438, 1.0497, 1.0401, 1.0232, 1.0072, 1])
+    end
+
+    describe "custom overshoot" do
+      let(:f) { D3.send(ease).overshoot(4) }
+      it do
+        expect(curve_f).to eq([0, -0.0175, -0.06, -0.1125, -0.16, -0.1875, -0.18, -0.1225, 0, 0.2025, 0.5, 0.7975, 1, 1.1225, 1.18, 1.1875, 1.16, 1.1125, 1.06, 1.0175, 1])
+      end
+    end
+  end
+
+  describe "d3.ease_back_in_out" do
+    let(:ease) { :ease_back_in_out }
+    it do
+      expect(curve).to eq(curve_f)
+      expect(curve).to eq([0, -0.0072, -0.0232, -0.0401, -0.0497, -0.0438, -0.0145, 0.0464, 0.1471, 0.2956, 0.5, 0.7044, 0.8529, 0.9536, 1.0145, 1.0438, 1.0497, 1.0401, 1.0232, 1.0072, 1])
+    end
+
+    describe "custom overshoot" do
+      let(:f) { D3.send(ease).overshoot(4) }
+      it do
+        expect(curve_f).to eq([0, -0.0175, -0.06, -0.1125, -0.16, -0.1875, -0.18, -0.1225, 0, 0.2025, 0.5, 0.7975, 1, 1.1225, 1.18, 1.1875, 1.16, 1.1125, 1.06, 1.0175, 1])
+      end
+    end
+  end
 end
