@@ -20,6 +20,7 @@ end
 require_relative "d3/collections"
 require_relative "d3/color"
 require_relative "d3/ease"
+require_relative "d3/format"
 require_relative "d3/histograms"
 require_relative "d3/misc"
 require_relative "d3/path"
