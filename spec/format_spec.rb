@@ -68,7 +68,7 @@ describe "d3 - format" do
     expect(locale.format("$.2f").(-3.5)).to eq("-3,50zł")
     expect(locale.format("$.2f").(123456.789)).to eq("123456,79zł")
     expect(locale.format(",.2r").(4223)).to eq("4.200")
-    expect(locale.format_prefix(",.0", 1e-3).(123456.789012)).to eq("123.456,789m")
+    expect(locale.format_prefix(",.0", 1e-3).(123456.789012)).to eq("123.456.789m")
   end
 
   # This test affects global state, so we must be sure to restore it
