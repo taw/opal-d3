@@ -307,4 +307,64 @@ describe "d3-ease" do
       end
     end
   end
+
+  describe "d3.ease_elastic_in" do
+    let(:ease) { :ease_elastic_in }
+    it do
+      expect(curve).to eq(curve_f)
+      expect(curve).to eq([-0.0005, 0.0007, 0.002, 0.0014, -0.002, -0.0055, -0.0039, 0.0055, 0.0156, 0.011, -0.0156, -0.0442, -0.0313, 0.0442, 0.125, 0.0884, -0.125, -0.3536, -0.25, 0.3536, 1])
+    end
+
+    describe "custom amplitude/period" do
+      let(:f) { D3.send(ease).amplitude(2).period(0.2) }
+      it do
+        expect(curve_f).to eq([0.001, -0.0024, -0.002, 0.0048, 0.0039, -0.0096, -0.0078, 0.0191, 0.0156, -0.0383, -0.0313, 0.0765, 0.0625, -0.1531, -0.125, 0.3062, 0.25, -0.6124, -0.5, 1.2247, 1])
+      end
+    end
+  end
+
+  describe "d3.ease_elastic_out" do
+    let(:ease) { :ease_elastic_out }
+    it do
+      expect(curve).to eq(curve_f)
+      expect(curve).to eq([0, 0.6464, 1.25, 1.3536, 1.125, 0.9116, 0.875, 0.9558, 1.0313, 1.0442, 1.0156, 0.989, 0.9844, 0.9945, 1.0039, 1.0055, 1.002, 0.9986, 0.998, 0.9993, 1.0005])
+    end
+
+    describe "custom amplitude/period" do
+      let(:f) { D3.send(ease).amplitude(2).period(0.2) }
+      it do
+        expect(curve_f).to eq([0, -0.2247, 1.5, 1.6124, 0.75, 0.6938, 1.125, 1.1531, 0.9375, 0.9235, 1.0313, 1.0383, 0.9844, 0.9809, 1.0078, 1.0096, 0.9961, 0.9952, 1.002, 1.0024, 0.999])
+      end
+    end
+  end
+
+  describe "d3.ease_elastic" do
+    let(:ease) { :ease_elastic }
+    it do
+      expect(curve).to eq(curve_f)
+      expect(curve).to eq([0, 0.6464, 1.25, 1.3536, 1.125, 0.9116, 0.875, 0.9558, 1.0313, 1.0442, 1.0156, 0.989, 0.9844, 0.9945, 1.0039, 1.0055, 1.002, 0.9986, 0.998, 0.9993, 1.0005])
+    end
+
+    describe "custom amplitude/period" do
+      let(:f) { D3.send(ease).amplitude(2).period(0.2) }
+      it do
+        expect(curve_f).to eq([0, -0.2247, 1.5, 1.6124, 0.75, 0.6938, 1.125, 1.1531, 0.9375, 0.9235, 1.0313, 1.0383, 0.9844, 0.9809, 1.0078, 1.0096, 0.9961, 0.9952, 1.002, 1.0024, 0.999])
+      end
+    end
+  end
+
+  describe "d3.ease_elastic_in_out" do
+    let(:ease) { :ease_elastic_in_out }
+    it do
+      expect(curve).to eq(curve_f)
+      expect(curve).to eq([-0.0002, 0.001, -0.001, -0.002, 0.0078, -0.0078, -0.0156, 0.0625, -0.0625, -0.125, 0.5, 1.125, 1.0625, 0.9375, 1.0156, 1.0078, 0.9922, 1.002, 1.001, 0.999, 1.0002])
+    end
+
+    describe "custom amplitude/period" do
+      let(:f) { D3.send(ease).amplitude(2).period(0.2) }
+      it do
+        expect(curve_f).to eq([0.0005, -0.001, 0.002, -0.0039, 0.0078, -0.0156, 0.0313, -0.0625, 0.125, -0.25, 0.5, 1.25, 0.875, 1.0625, 0.9688, 1.0156, 0.9922, 1.0039, 0.998, 1.001, 0.9995])
+      end
+    end
+  end
 end

@@ -27,6 +27,24 @@ module D3
     end
   end
 
+  class EaseElastic
+    def initialize(native)
+      @native = native
+    end
+
+    def amplitude(a)
+      D3::EaseElastic.new @native.JS.amplitude(a)
+    end
+
+    def period(p)
+      D3::EaseElastic.new @native.JS.period(p)
+    end
+
+    def call(t)
+      @native.call(t)
+    end
+  end
+
   class <<self
     def ease_linear(t=nil)
       if t
@@ -284,5 +302,36 @@ module D3
       end
     end
 
+    def ease_elastic(t=nil)
+      if t
+        @d3.JS.easeElastic(t)
+      else
+        D3::EaseElastic.new `#@d3.easeElastic`
+      end
+    end
+
+    def ease_elastic_in(t=nil)
+      if t
+        @d3.JS.easeElasticIn(t)
+      else
+        D3::EaseElastic.new `#@d3.easeElasticIn`
+      end
+    end
+
+    def ease_elastic_out(t=nil)
+      if t
+        @d3.JS.easeElasticOut(t)
+      else
+        D3::EaseElastic.new `#@d3.easeElasticOut`
+      end
+    end
+
+    def ease_elastic_in_out(t=nil)
+      if t
+        @d3.JS.easeElasticInOut(t)
+      else
+        D3::EaseElastic.new `#@d3.easeElasticInOut`
+      end
+    end
   end
 end
