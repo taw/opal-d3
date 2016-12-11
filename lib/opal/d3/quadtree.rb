@@ -16,7 +16,7 @@ module D3
     def next
       return nil if internal?
       return nil if `#@native.next == undefined`
-      Quad.new(`#@native.next`)
+      D3::Quad.new(`#@native.next`)
     end
 
     def data
@@ -31,7 +31,7 @@ module D3
         if `q == null`
           nil
         else
-          Quad.new(q)
+          D3::Quad.new(q)
         end
       end
     end
@@ -68,7 +68,7 @@ module D3
     end
 
     def copy
-      QuadTree.new @native.JS.copy
+      D3::QuadTree.new @native.JS.copy
     end
 
     # visit/visitAfter functions have stupid JS habit of using non-nil return as control
@@ -89,11 +89,47 @@ module D3
     end
 
     alias_native :find
+
+    def extent(extent=nil)
+      if extent
+        @native.JS.extent(extent)
+        self
+      else
+        @native.JS.extent
+      end
+    end
+
+    def cover(x,y)
+      @native.JS.cover(x,y)
+      self
+    end
+
+    def root
+      D3::Quad.new @native.JS.root
+    end
+
+    def x(&block)
+      if block_given?
+        @native.JS.x(block)
+        self
+      else
+        @native.JS.x
+      end
+    end
+
+    def y(&block)
+      if block_given?
+        @native.JS.y(block)
+        self
+      else
+        @native.JS.y
+      end
+    end
   end
 
   class << self
     def quadtree(*args)
-      QuadTree.new @d3.JS.quadtree(*args)
+      D3::QuadTree.new @d3.JS.quadtree(*args)
     end
   end
 end

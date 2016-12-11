@@ -85,4 +85,44 @@ describe "d3 - quadtree" do
       [1, 2, 5, 6, true, false, nil, false, [true, false, false, true]],
     ])
   end
+
+  it "quadtree.root" do
+    q = D3.quadtree([a,b,c])
+    root = q.root
+    expect(root).to be_instance_of(D3::Quad)
+    expect(root).to be_internal
+  end
+
+  it "quadtree.extent" do
+    q = D3.quadtree([a,b,c])
+    expect(q.extent).to eq([[1, 2], [5, 6]])
+    expect(q.extent([[0,0],[10,1]]).extent([[-1,-1],[1,1]]).extent).to eq([[-3, -10], [13, 6]])
+  end
+
+  it "quadtree.cover" do
+    q = D3.quadtree([a,b,c])
+    expect(q.extent).to eq([[1, 2], [5, 6]])
+    expect(q.cover(0,0).cover(-2,10).extent).to eq([[-11, -2], [5, 14]])
+  end
+
+  it "quadtree.x/y defaults" do
+    q = D3.quadtree([a,b,c])
+    expect(q.x.(c)).to eq(5)
+    expect(q.y.(c)).to eq(6)
+  end
+
+  it "quadtree.x/y constructor" do
+    q = D3.quadtree([a,b,c], proc{|(x,y,n)| x*10}, proc{|(x,y,n)| y*10})
+    expect(q.x.(c)).to eq(50)
+    expect(q.y.(c)).to eq(60)
+    expect(q.extent).to eq([[10, 20], [74, 84]])
+  end
+
+  it "quadtree.x/y" do
+    q = D3.quadtree
+    q.x{|(x,y,n)| y*100}.y{|(x,y,n)| x*100}.add_all([a,b,c])
+    expect(q.x.(c)).to eq(600)
+    expect(q.y.(c)).to eq(500)
+    expect(q.extent).to eq([[200, 100], [712, 612]])
+  end
 end
