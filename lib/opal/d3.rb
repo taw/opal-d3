@@ -1,5 +1,6 @@
 require "opal"
 require "opal-parser"
+require "native"
 
 class Module
   def alias_d3(ruby_name, js_name=ruby_name)
@@ -25,6 +26,7 @@ require_relative "d3/histograms"
 require_relative "d3/misc"
 require_relative "d3/path"
 require_relative "d3/polygon"
+require_relative "d3/quadtree"
 require_relative "d3/random"
 require_relative "d3/search"
 require_relative "d3/selection"

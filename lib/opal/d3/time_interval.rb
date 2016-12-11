@@ -1,6 +1,3 @@
-require "time"
-require "native"
-
 module D3
   class TimeInterval
     include Native

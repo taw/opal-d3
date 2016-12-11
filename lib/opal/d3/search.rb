@@ -1,5 +1,3 @@
-require "native"
-
 # all these methods return indexes not values
 module D3
   class Bisector
