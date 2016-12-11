@@ -4,6 +4,7 @@ describe "d3 - quadtree" do
   let(:b) { [3,4,"b"] }
   let(:c) { [5,6,"c"] }
   let(:d) { [7,8,"c"] }
+  let(:e) { [3,4,"e"] }
 
   it "d3.quadtree" do
     expect(D3.quadtree).to be_instance_of(D3::QuadTree)
@@ -51,5 +52,37 @@ describe "d3 - quadtree" do
     q1.add(c)
     expect(q1.data).to eq([a,c])
     expect(q2.data).to eq([a,b])
+  end
+
+  it "quadtree.visit" do
+    q = D3.quadtree([a,b,c,e])
+    called = []
+    q.visit do |node, x0, y0, x1, y1|
+      called << [x0, y0, x1, y1, node.internal?, node.leaf?, node.data, !!node.next, node.children && node.children.map{|x| !!x}]
+      false
+    end
+    expect(called).to eq([
+      [1, 2, 5, 6, true, false, nil, false, [true, false, false, true]],
+      [1, 2, 3, 4, false, true, [1, 2, "a"], false, nil],
+      [3, 4, 5, 6, true, false, nil, false, [true, false, false, true]],
+      [3, 4, 4, 5, false, true, [3, 4, "e"], true, nil],
+      [4, 5, 5, 6, false, true, [5, 6, "c"], false, nil],
+    ])
+  end
+
+  it "quadtree.visit_after" do
+    q = D3.quadtree([a,b,c,e])
+    called = []
+    q.visit_after do |node, x0, y0, x1, y1|
+      called << [x0, y0, x1, y1, node.internal?, node.leaf?, node.data, !!node.next, node.children && node.children.map{|x| !!x}]
+      false
+    end
+    expect(called).to eq([
+      [1, 2, 3, 4, false, true, [1, 2, "a"], false, nil],
+      [3, 4, 4, 5, false, true, [3, 4, "e"], true, nil],
+      [4, 5, 5, 6, false, true, [5, 6, "c"], false, nil],
+      [3, 4, 5, 6, true, false, nil, false, [true, false, false, true]],
+      [1, 2, 5, 6, true, false, nil, false, [true, false, false, true]],
+    ])
   end
 end
