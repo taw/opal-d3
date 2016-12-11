@@ -90,5 +90,17 @@ module D3
     def scale_log
       D3::LogScale.new @d3.JS.scaleLog
     end
+
+    def scale_identity
+      D3::ContinuousScale.new @d3.JS.scaleIdentity
+    end
+
+    def scale_time
+      D3::ContinuousScale.new @d3.JS.scaleTime
+    end
+
+    def scale_utc
+      D3::ContinuousScale.new @d3.JS.scaleUtc
+    end
   end
 end

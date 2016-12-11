@@ -1,3 +1,5 @@
+require "time"
+
 describe "d3 - continuous scale" do
   describe "linear" do
     it "d3.scale_linear" do
@@ -93,6 +95,95 @@ describe "d3 - continuous scale" do
       x = D3.scale_log.base(2).domain([1, 1024]).range([0, 100])
       expect(x.(256)).to eq(80)
       expect(x.invert(50)).to eq(32)
+    end
+  end
+
+  describe "identity" do
+    it 'd3.scale_log' do
+      expect(D3.scale_identity).to be_instance_of(D3::ContinuousScale)
+    end
+
+    it "basics" do
+      x = D3.scale_identity.domain([10,20])
+      expect(x.(16)).to eq(16)
+      expect(x.invert(12)).to eq(12)
+      expect(x.domain).to eq([10,20])
+      expect(x.range).to eq([10,20])
+    end
+  end
+
+  describe "time" do
+    let(:x) { D3.scale_time.domain([Time.parse("Jan 01 1990 00:00:00"), Time.parse(Time.parse("Jan 01 1998 00:00:00"))]).range([0,100]) }
+    let(:y) { D3.scale_utc.domain([Time.parse("Jan 01 1990 00:00:00"), Time.parse(Time.parse("Jan 01 1998 00:00:00"))]).range([0,100]) }
+    it "d3.scale_time" do
+      expect(D3.scale_time).to be_instance_of(D3::ContinuousScale)
+    end
+
+    it "d3.scale_utc" do
+      expect(D3.scale_utc).to be_instance_of(D3::ContinuousScale)
+    end
+
+    it "basics" do
+      expect(x.(Time.parse("Jul 01 1995 00:00:00"))).to eq(68.68440565822496)
+    end
+
+    it "invert" do
+      expect(x.invert(75).to_s).to eq("1996-01-01 12:00:00 -0000")
+    end
+
+    it "ticks" do
+      expect(x.ticks(4).map(&:to_s)).to eq([
+        "1990-01-01 00:00:00 -0000",
+        "1992-01-01 00:00:00 -0000",
+        "1994-01-01 00:00:00 -0000",
+        "1996-01-01 00:00:00 -0000",
+        "1998-01-01 00:00:00 -0000",
+      ])
+    end
+
+    # Local time vs UTC - it's total mess in javascript
+    it "ticks interval" do
+      expect(x.ticks(D3.time_month.every(8)).map(&:to_s)).to eq([
+        "1990-01-01 00:00:00 -0000",
+        "1990-09-01 00:00:00 +0100",
+        "1991-01-01 00:00:00 -0000",
+        "1991-09-01 00:00:00 +0100",
+        "1992-01-01 00:00:00 -0000",
+        "1992-09-01 00:00:00 +0100",
+        "1993-01-01 00:00:00 -0000",
+        "1993-09-01 00:00:00 +0100",
+        "1994-01-01 00:00:00 -0000",
+        "1994-09-01 00:00:00 +0100",
+        "1995-01-01 00:00:00 -0000",
+        "1995-09-01 00:00:00 +0100",
+        "1996-01-01 00:00:00 -0000",
+        "1996-09-01 00:00:00 +0100",
+        "1997-01-01 00:00:00 -0000",
+        "1997-09-01 00:00:00 +0100",
+        "1998-01-01 00:00:00 -0000",
+      ])
+    end
+
+    it "utc ticks interval" do
+      expect(y.ticks(D3.utc_month.every(8)).map(&:to_s)).to eq([
+        "1990-01-01 00:00:00 -0000",
+        "1990-09-01 01:00:00 +0100",
+        "1991-01-01 00:00:00 -0000",
+        "1991-09-01 01:00:00 +0100",
+        "1992-01-01 00:00:00 -0000",
+        "1992-09-01 01:00:00 +0100",
+        "1993-01-01 00:00:00 -0000",
+        "1993-09-01 01:00:00 +0100",
+        "1994-01-01 00:00:00 -0000",
+        "1994-09-01 01:00:00 +0100",
+        "1995-01-01 00:00:00 -0000",
+        "1995-09-01 01:00:00 +0100",
+        "1996-01-01 00:00:00 -0000",
+        "1996-09-01 01:00:00 +0100",
+        "1997-01-01 00:00:00 -0000",
+        "1997-09-01 01:00:00 +0100",
+        "1998-01-01 00:00:00 -0000",
+      ])
     end
   end
 end
