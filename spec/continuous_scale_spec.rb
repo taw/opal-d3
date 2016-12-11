@@ -126,7 +126,7 @@ describe "d3 - continuous scale" do
     end
 
     it "basics" do
-      expect(x.(Time.parse("Jul 01 1995 00:00:00")).round(2)).to eq(68.68)
+      expect(x.(Time.parse("Jul 01 1995 00:00:00")).round(1)).to eq(68.7)
     end
 
     it "invert" do
