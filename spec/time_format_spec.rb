@@ -44,12 +44,12 @@ describe "d3 - time format" do
   it "d3.utc_parse" do
     f = D3.utc_parse("%B %d, %Y")
     expect(f).to be_instance_of(Proc)
-    expect(f.("June 30, 2015")).to eq(Time.parse("June 30, 2015 01:00:00"))
+    expect(f.("June 30, 2015")).to eq(Time.parse("June 30, 2015 00:00:00 UTC"))
   end
 
   it "d3.iso_format / d3.iso_parse" do
-    t = Time.parse("June 30, 2015 12:30:45")
-    s = "2015-06-30T11:30:45.000Z"
+    t = Time.parse("June 30, 2015 12:30:45 UTC")
+    s = "2015-06-30T12:30:45.000Z"
     expect(D3.iso_format(t)).to eq(s)
     expect(D3.iso_parse(s)).to eq(t)
   end
@@ -78,7 +78,7 @@ describe "d3 - time format" do
     it "d3.utc_parse" do
       f = locale.utc_parse("%B %d, %Y")
       expect(f).to be_instance_of(Proc)
-      expect(f.("Czerwiec 30, 2015")).to eq(Time.parse("June 30, 2015 01:00:00"))
+      expect(f.("Czerwiec 30, 2015")).to eq(Time.parse("June 30, 2015 00:00:00 UTC"))
     end
   end
 
