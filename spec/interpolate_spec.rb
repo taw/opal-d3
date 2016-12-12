@@ -22,8 +22,8 @@ describe "d3 - interpolate" do
   end
 
   it "d3.interpolate_date" do
-    f = D3.interpolate_date(Time.parse("June 30, 2015 00:00:00"), Time.parse("December 31, 2016 12:00:00"))
-    expect(f.(0.5)).to eq(Time.parse("March 31, 2016 06:30:00"))
+    f = D3.interpolate_date(Time.parse("June 30, 2015 00:00:00 UTC"), Time.parse("December 31, 2016 12:00:00 UTC"))
+    expect(f.(0.5)).to eq(Time.parse("March 31, 2016 06:00:00 UTC"))
   end
 
   it "d3.interpolate_rgb" do
