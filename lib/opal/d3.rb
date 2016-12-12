@@ -18,6 +18,7 @@ module D3
   end
 end
 
+require_relative "d3/axis"
 require_relative "d3/collections"
 require_relative "d3/color"
 require_relative "d3/continuous_scale"
