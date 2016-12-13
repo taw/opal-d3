@@ -6,7 +6,6 @@ module D3
       @native = native
     end
 
-    include Native
     def call(t)
       @native.call(t)
     end

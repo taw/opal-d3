@@ -56,6 +56,7 @@ module D3
 end
 
 require_relative "d3/axis"
+require_relative "d3/band_scale"
 require_relative "d3/collections"
 require_relative "d3/color"
 require_relative "d3/continuous_scale"
@@ -68,6 +69,7 @@ require_relative "d3/misc"
 require_relative "d3/nest"
 require_relative "d3/ordinal_scale"
 require_relative "d3/path"
+require_relative "d3/point_scale"
 require_relative "d3/polygon"
 require_relative "d3/quadtree"
 require_relative "d3/quantile_scale"
