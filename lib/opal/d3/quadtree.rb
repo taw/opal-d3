@@ -44,32 +44,16 @@ module D3
     end
 
     include Native
-    alias_native :size
     alias_native :data
-
-    def add(datum)
-      @native.JS.add(datum)
-      self
-    end
-
-    def add_all(data)
-      @native.JS.addAll(data)
-      self
-    end
-
-    def remove(datum)
-      @native.JS.remove(datum)
-      self
-    end
-
-    def remove_all(data)
-      @native.JS.removeAll(data)
-      self
-    end
-
-    def copy
-      D3::QuadTree.new @native.JS.copy
-    end
+    alias_native :find
+    alias_native :size
+    alias_native_chainable :add
+    alias_native_chainable :add_all, :addAll
+    alias_native_chainable :cover
+    alias_native_chainable :remove
+    alias_native_chainable :remove_all, :removeAll
+    alias_native_new :copy
+    attribute_d3 :extent
 
     # visit/visitAfter functions have stupid JS habit of using non-nil return as control
     # and that messes up with languages which have automatic return
@@ -85,22 +69,6 @@ module D3
       @native.JS.visitAfter(proc do |node, x0, y0, x1, y1|
         yield(D3::Quad.new(node), x0, y0, x1, y1)
       end)
-      self
-    end
-
-    alias_native :find
-
-    def extent(extent=nil)
-      if extent
-        @native.JS.extent(extent)
-        self
-      else
-        @native.JS.extent
-      end
-    end
-
-    def cover(x,y)
-      @native.JS.cover(x,y)
       self
     end
 

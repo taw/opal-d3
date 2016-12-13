@@ -5,26 +5,14 @@ module D3
       @native = color
     end
 
-    def to_s
-      @native.JS.toString
-    end
+    include Native
+    alias_native :to_s, :toString
+    alias_native_new :brighter
+    alias_native_new :darker
+    alias_native :displayable?, :displayable
+    alias_native_new :rgb
 
-    def brighter(*args)
-      Color.new(@native.JS.brighter(*args))
-    end
-
-    def darker(*args)
-      Color.new(@native.JS.darker(*args))
-    end
-
-    def displayable?
-      @native.JS.displayable
-    end
-
-    def rgb
-      Color.new(@native.JS.rgb)
-    end
-
+    # Various subsets of these are valid depending on color - maybe we should properly subclass?
     def a; `#@native.a` end
     def b; `#@native.b` end
     def c; `#@native.c` end

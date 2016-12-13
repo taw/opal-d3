@@ -9,23 +9,8 @@ module D3
       @native.call(t)
     end
 
-    def domain(d=nil)
-      if d
-        @native.JS.domain(d)
-        self
-      else
-        @native.JS.domain
-      end
-    end
-
-    def clamp(c=nil)
-      if c == nil
-        @native.JS.clamp
-      else
-        @native.JS.clamp(!!c)
-        self
-      end
-    end
+    attribute_d3 :domain
+    attribute_d3 :clamp
 
     def copy
       self.class.new @native.JS.copy

@@ -6,40 +6,17 @@ module D3
       @native = native
     end
 
-    def domain(d=nil)
-      if d
-        @native.JS.domain(d)
-        self
-      else
-        @native.JS.domain
-      end
-    end
-
-    def range(r=nil)
-      if r
-        @native.JS.range(r)
-        self
-      else
-        @native.JS.range
-      end
-    end
-
     def call(t)
       @native.call(t)
     end
 
+    attribute_d3 :domain
+    attribute_d3 :range
     alias_native :invert_extent, :invertExtent
     alias_native :ticks
     alias_native :tick_format, :tickFormat
-
-    def nice(*args)
-      @native.JS.nice(*args)
-      self
-    end
-
-    def copy
-      self.class.new @native.JS.copy
-    end
+    alias_native_chainable :nice
+    alias_native_new :copy
   end
 
   class << self

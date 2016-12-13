@@ -6,72 +6,27 @@ module D3
       @native = native
     end
 
+    include Native
     def call(t)
       @native.call(t)
     end
 
-    def invert(t)
-      @native.JS.invert(t)
-    end
-
-    def domain(d=nil)
-      if d
-        @native.JS.domain(d)
-        self
-      else
-        @native.JS.domain
-      end
-    end
-
-    def range(r=nil)
-      if r
-        @native.JS.range(r)
-        self
-      else
-        @native.JS.range
-      end
-    end
-
-    def clamp(c=nil)
-      if c == nil
-        @native.JS.clamp
-      else
-        @native.JS.clamp(!!c)
-        self
-      end
-    end
-
-    def nice(*args)
-      @native.JS.nice(*args)
-      self
-    end
-
-    def copy
-      self.class.new @native.JS.copy
-    end
-
+    alias_native :invert
+    attribute_d3 :domain
+    attribute_d3 :range
+    attribute_d3 :clamp
+    alias_native_chainable :nice
+    alias_native_new :copy
     alias_native :ticks
     alias_native :tick_format, :tickFormat
   end
 
   class PowScale < ContinuousScale
-    def exponent(e=nil)
-      if e
-        self.class.new @native.JS.exponent(e)
-      else
-        @native.JS.exponent
-      end
-    end
+    attribute_d3 :exponent
   end
 
   class LogScale < ContinuousScale
-    def base(b=nil)
-      if b
-        self.class.new @native.JS.base(b)
-      else
-        @native.JS.base
-      end
-    end
+    attribute_d3 :base
   end
 
   class << self

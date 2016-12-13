@@ -6,23 +6,9 @@ module D3
       @native = native
     end
 
-    def domain(d=nil)
-      if d
-        @native.JS.domain(d)
-        self
-      else
-        @native.JS.domain
-      end
-    end
-
-    def range(r=nil)
-      if r
-        @native.JS.range(r)
-        self
-      else
-        @native.JS.range
-      end
-    end
+    attribute_d3 :domain
+    attribute_d3 :range
+    alias_native_new :copy
 
     def call(t)
       @native.call(t)
@@ -31,10 +17,6 @@ module D3
     def invert_extent(t)
       a,b = @native.JS.invertExtent(t)
       [`a === undefined ? nil : a`, `b === undefined ? nil : b`]
-    end
-
-    def copy
-      self.class.new @native.JS.copy
     end
   end
 

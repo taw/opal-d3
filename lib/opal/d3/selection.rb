@@ -15,27 +15,11 @@ module D3
       `#@native.toString()`
     end
 
-    alias_native :text
-    def text=(value)
-      @native.JS.text(value)
-    end
-
-    alias_native :html
-    def html=(value)
-      @native.JS.html(value)
-    end
-
-    def append(type)
-      Selection.new @native.JS.append(type)
-    end
-
-    def select(selector)
-      Selection.new @native.JS.select(selector)
-    end
-
-    def select_all(selector)
-      Selection.new @native.JS.selectAll(selector)
-    end
+    attribute_d3 :text
+    attribute_d3 :html
+    alias_native_new :append
+    alias_native_new :select
+    alias_native_new :select_all, :selectAll
 
     def style(name, value=`undefined`, priority=`undefined`)
       if `value === undefined`

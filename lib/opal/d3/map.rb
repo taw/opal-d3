@@ -5,39 +5,21 @@ module D3
       @native = native
     end
 
-    def has?(key)
-      @native.JS.has(key)
-    end
-
     def get(key)
       result = @native.JS.get(key)
       `result === undefined ? nil : result`
     end
+    include Native
+    alias_native_chainable :set
+    alias_native_chainable :remove
+    alias_native_chainable :clear
+    alias_native :keys
+    alias_native :values
+    alias_native :size
+    alias_native :empty?, :empty
+    alias_native :has?, :has
     alias_method :[], :get
-
-    def set(key, value)
-      @native.JS.set(key, value)
-      self
-    end
     alias_method :[]=, :set
-
-    def remove(key)
-      @native.JS.remove(key)
-      self
-    end
-
-    def clear
-      @native.JS.clear()
-      self
-    end
-
-    def keys
-      @native.JS.keys()
-    end
-
-    def values
-      @native.JS.values()
-    end
 
     def entries
       @native.JS.entries().map{|o| [`o.key`, `o.value`]}
@@ -52,14 +34,6 @@ module D3
     def each(&block)
       @native.JS.each(block)
       self
-    end
-
-    def empty?
-      @native.JS.empty()
-    end
-
-    def size
-      @native.JS.size
     end
 
     def inspect

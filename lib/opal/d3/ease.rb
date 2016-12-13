@@ -3,10 +3,7 @@ module D3
     def initialize(native)
       @native = native
     end
-
-    def exponent(e)
-      D3::EasePoly.new @native.JS.exponent(e)
-    end
+    alias_native_new :exponent
 
     def call(t)
       @native.call(t)
@@ -17,10 +14,7 @@ module D3
     def initialize(native)
       @native = native
     end
-
-    def overshoot(s)
-      D3::EaseBack.new @native.JS.overshoot(s)
-    end
+    alias_native_new :overshoot
 
     def call(t)
       @native.call(t)
@@ -32,13 +26,8 @@ module D3
       @native = native
     end
 
-    def amplitude(a)
-      D3::EaseElastic.new @native.JS.amplitude(a)
-    end
-
-    def period(p)
-      D3::EaseElastic.new @native.JS.period(p)
-    end
+    alias_native_new :amplitude
+    alias_native_new :period
 
     def call(t)
       @native.call(t)

@@ -12,10 +12,7 @@ module D3
     alias_native :offset
     alias_native :range
     alias_native :count
-
-    def every(step)
-      D3::TimeInterval.new(@native.JS.every(step))
-    end
+    alias_native_new :every
 
     def filter(&block)
       D3::TimeInterval.new(@native.JS.filter(block))
