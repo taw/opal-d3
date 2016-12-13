@@ -60,4 +60,28 @@ describe "d3 - selection" do
     expect(h1.html).to eq("Goodbye, World!")
     expect(h1.text).to eq("Goodbye, World!")
   end
+
+  it "selection.attr / selection.style" do
+    d = D3.select_all("div")
+    d.append("p").attr("class", "big").style("color", "red")
+    expect(d.html).to eq(%Q[<p class="big" style="color: red;"></p>])
+
+    p = d.select_all("p")
+    expect(p.attr("class")).to eq("big")
+    expect(p.style("color")).to eq("rgb(255, 0, 0)")
+  end
+
+  it "svg" do
+    D3.select("div")
+      .append("svg")
+        .attr("width", 960)
+        .attr("height", 500)
+      .append("g")
+        .attr("transform", "translate(20,20)")
+      .append("rect")
+        .attr("width", 920)
+        .attr("height", 460)
+    expect(D3.select("div").html).to eq(
+      %Q[<svg width="960" height="500"><g transform="translate(20,20)"><rect width="920" height="460"></rect></g></svg>])
+  end
 end

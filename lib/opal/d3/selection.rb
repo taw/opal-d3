@@ -29,6 +29,23 @@ module D3
         Selection.new @native.JS.style(name, value, priority)
       end
     end
+
+    # nil means something specific (reset value),
+    # so we need another special value
+    def attr(name, value=`undefined`, &block)
+      if block
+        @native.JS.attr(name, block)
+        self
+      elsif `value == undefined`
+        @native.JS.attr(name)
+      elsif value == nil
+        @native.JS.attr(name, `null`)
+        self
+      else
+        @native.JS.attr(name, value)
+        self
+      end
+    end
   end
 
   class << self
