@@ -18,6 +18,15 @@ module D3
     alias_native_new :copy
     alias_native :ticks
     alias_native :tick_format, :tickFormat
+    alias_native_chainable :range_round, :rangeRound
+    def interpolate(&block)
+      if block
+        @native.JS.interpolate(block)
+        self
+      else
+        @native.JS.interpolate
+      end
+    end
   end
 
   class PowScale < ContinuousScale

@@ -16,6 +16,33 @@ describe "d3 - continuous scale" do
       expect(x.invert(-160)).to eq(-10)
     end
 
+    it "range_round" do
+      x = D3.scale_linear.domain([0,6]).range([0, 100])
+      y = D3.scale_linear.domain([0,6]).range_round([0, 100])
+      expect(x.(4)).to eq(66.66666666666666)
+      expect(y.(4)).to eq(67)
+    end
+
+    describe "interpolate" do
+      let(:x) { D3.scale_linear.domain([0,6]).range([0, 100]) }
+      let(:xf) { x.copy.interpolate{|a,b| proc{|t| (a + (b-a)*t).floor }}}
+      let(:xc) { x.copy.interpolate{|a,b| proc{|t| (a + (b-a)*t).ceil }}}
+      let(:xr) { x.copy.interpolate(&D3.interpolate_round) }
+      it "floor" do
+        expect(xf.(4)).to eq(66)
+      end
+      it "ceil" do
+        expect(xc.(4)).to eq(67)
+      end
+      it "round" do
+        expect(xr.(4)).to eq(67)
+      end
+      it "get interpolator" do
+        expect(x.interpolate.(0,10).(0.34)).to eq(3.4000000000000004)
+        expect(xr.interpolate.(0,10).(0.34)).to eq(3)
+      end
+    end
+
     it ".clamp" do
       x = D3.scale_linear.domain([10, 130]).range([0, 960])
       expect(x.clamp).to eq(false)
