@@ -71,6 +71,61 @@ describe "d3 - selection" do
     expect(p.style("color")).to eq("rgb(255, 0, 0)")
   end
 
+  describe "data" do
+    let(:data) {[
+      {name: "A", value: 10},
+      {name: "B", value: 20},
+      {name: "C", value: 30},
+    ]}
+    let(:root) { D3.select("div") }
+    let(:html) { root.html }
+    it "enter" do
+      root
+        .append("ul")
+        .select_all("li")
+        .data(data)
+        .enter
+        .append("li")
+        .text{|d| d[:name]}
+        .style("font-size"){|d| "#{d[:value]}px"}
+      expect(html).to eq([
+        %Q[<ul>],
+        %Q[<li style="font-size: 10px;">A</li>],
+        %Q[<li style="font-size: 20px;">B</li>],
+        %Q[<li style="font-size: 30px;">C</li>],
+        %Q[</ul>],
+      ].join)
+    end
+
+    it "matrix" do
+      matrix = [
+        [11975,  5871, 8916, 2868],
+        [ 1951, 10048, 2060, 6171],
+        [ 8010, 16145, 8090, 8045],
+        [ 1013,   990,  940, 6907],
+      ]
+      tr = root
+        .append("table")
+        .select_all("tr")
+        .data(matrix)
+        .enter
+        .append("tr")
+      td = tr.select_all("td")
+        .data{|d| d}
+        .enter
+        .append("td")
+        .text{|d| d}
+      expect(html).to eq([
+        %Q[<table>],
+        %Q[<tr><td>11975</td><td>5871</td><td>8916</td><td>2868</td></tr>],
+        %Q[<tr><td>1951</td><td>10048</td><td>2060</td><td>6171</td></tr>],
+        %Q[<tr><td>8010</td><td>16145</td><td>8090</td><td>8045</td></tr>],
+        %Q[<tr><td>1013</td><td>990</td><td>940</td><td>6907</td></tr>],
+        %Q[</table>],
+      ].join)
+    end
+  end
+
   it "svg" do
     D3.select("div")
       .append("svg")

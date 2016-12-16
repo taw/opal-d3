@@ -15,14 +15,66 @@ module D3
       `#@native.toString()`
     end
 
-    attribute_d3 :text
-    attribute_d3 :html
+    def text(new_value=nil, &block)
+      if block
+        @native.JS.text(block)
+        self
+      elsif new_value != nil
+        @native.JS.text(new_value)
+        self
+      else
+        @native.JS.text
+      end
+    end
+
+    def text=(new_value)
+      @native.JS.text(new_value)
+    end
+
+    def html(new_value=nil, &block)
+      if block
+        @native.JS.html(block)
+        self
+      elsif new_value != nil
+        @native.JS.html(new_value)
+        self
+      else
+        @native.JS.html
+      end
+    end
+
+    def html=(new_value)
+      @native.JS.html(new_value)
+    end
+
+    def data(data=nil,key=nil,&block)
+      if block
+        self.class.new @native.JS.data(block)
+      elsif key != nil
+        self.class.new @native.JS.data(data,key)
+      elsif data != nil
+        self.class.new @native.JS.data(data)
+      else
+        @native.JS.data
+      end
+    end
+
     alias_native_new :append
     alias_native_new :select
     alias_native_new :select_all, :selectAll
+    alias_native_new :enter
+    alias_native_new :exit
 
-    def style(name, value=`undefined`, priority=`undefined`)
-      if `value === undefined`
+    # Usage:
+    # style("foo")
+    # style("foo"){ value }
+    # style("foo", value)
+    # style("foo", value, priority)
+    def style(name, value=`undefined`, priority=`undefined`, &block)
+      if block
+        raise if `name === undefined` or `priority !== undefined` or `value !== undefined`
+        Selection.new @native.JS.style(name, block)
+      elsif `value === undefined`
         @native.JS.style(name)
       else
         value = `value === nil ? null : value`
