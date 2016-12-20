@@ -1,10 +1,10 @@
 require "bundler"
 Bundler.require
 
-opal = Opal::Server.new{|s|
+opal = Opal::Server.new do |s|
   s.append_path "app"
   s.append_path "assets"
-}
+end
 
 map "/assets" do
   run opal.sprockets
