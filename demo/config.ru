@@ -15,7 +15,7 @@ get "/" do
 end
 
 get "/v/:name" do
-  send_file "#{params[:name]}.html"
+  erb params[:name].to_sym
 end
 
 run Sinatra::Application

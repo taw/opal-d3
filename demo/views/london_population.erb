@@ -5,15 +5,24 @@
   <title>London Population</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
   <link rel="stylesheet" href="/assets/style.css">
+  <link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css' rel='stylesheet'/>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
   <div class="container">
     <h1>London Population</h1>
     <div id="visualization"></div>
+    <div id="code">
+      <h1>Code</h1>
+      <pre><code><%=
+        open("#{__dir__}/../app/#{File.basename(__FILE__, ".erb")}.rb").read
+      %></code></pre>
+    </div>
     <script src="/assets/d3.js"></script>
     <script src="/assets/london_population.js"></script>
     <script>
-      window.onload = function() { Opal.load("london_population") }
+      window.onload = function() { Opal.load("london_population"); }
     </script>
   </div>
 </body>

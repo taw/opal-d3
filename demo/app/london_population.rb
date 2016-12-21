@@ -2,7 +2,7 @@ require "opal"
 require "opal-d3"
 require "data/london_population"
 
-svg = D3.select("body")
+svg = D3.select("#visualization")
         .append("svg")
         .attr("height", "400px")
         .attr("width", "100%")
