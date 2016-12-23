@@ -17,8 +17,32 @@ class Module
   # obj.foo(1).bar(2)
   def attribute_d3(ruby_name, js_name=ruby_name)
     eval <<-EOF
-      def #{ruby_name}(new_value=nil)
-        if new_value != nil
+      def #{ruby_name}(new_value=`undefined`)
+        if `new_value !== undefined`
+          @native.JS.#{js_name}(new_value)
+          self
+        else
+          @native.JS.#{js_name}
+        end
+      end
+      def #{ruby_name}=(new_value)
+        @native.JS.#{js_name}(new_value)
+      end
+    EOF
+  end
+
+  # This provides ruby style and jquery style interfaces,
+  # and also block interface:
+  # obj.foo
+  # obj.foo = 1; obj.bar = 2
+  # obj.foo(1).bar(2).buzz{...}
+  def attribute_d3_block(ruby_name, js_name=ruby_name)
+    eval <<-EOF
+      def #{ruby_name}(new_value=`undefined`, &block)
+        if block_given?
+          @native.JS.#{js_name}(block)
+          self
+        elsif `new_value !== undefined`
           @native.JS.#{js_name}(new_value)
           self
         else
