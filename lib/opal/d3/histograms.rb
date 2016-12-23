@@ -1,8 +1,6 @@
 module D3
   class Histogram
-    def initialize
-      @native = `window.d3.histogram()`
-    end
+    include D3::Native
 
     def call(data)
       @native.call(data)
@@ -28,7 +26,7 @@ module D3
 
   class << self
     def histogram
-      D3::Histogram.new
+      D3::Histogram.new @d3.JS.histogram
     end
 
     def threshold_freedman_diaconis(*args)

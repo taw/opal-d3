@@ -1,9 +1,6 @@
 module D3
   class StackGenerator
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
+    include D3::Native
   end
 
   class << self

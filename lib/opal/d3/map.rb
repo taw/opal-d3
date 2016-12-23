@@ -1,9 +1,6 @@
 module D3
   class Map
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
+    include D3::Native
 
     def get(key)
       result = @native.JS.get(key)

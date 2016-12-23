@@ -1,11 +1,7 @@
 module D3
   class Color
+    include D3::Native
     attr_reader :native
-    def initialize(color)
-      @native = color
-    end
-
-    include Native
     alias_native :to_s, :toString
     alias_native_new :brighter
     alias_native_new :darker

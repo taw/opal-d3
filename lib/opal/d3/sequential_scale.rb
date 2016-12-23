@@ -1,9 +1,6 @@
 module D3
   class SequentialScale
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
+    include D3::Native
 
     def call(t)
       @native.call(t)

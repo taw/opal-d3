@@ -1,11 +1,7 @@
 # all these methods return indexes not values
 module D3
   class Bisector
-    def initialize(&block)
-      @native = `window.d3`.JS.bisector(block)
-    end
-
-    include Native
+    include D3::Native
     alias_native :left
     alias_native :right
   end
@@ -26,7 +22,7 @@ module D3
     end
 
     def bisector(&block)
-      D3::Bisector.new(&block)
+      D3::Bisector.new @d3.JS.bisector(block)
     end
   end
 end

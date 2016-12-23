@@ -1,11 +1,6 @@
 module D3
   class Selection
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
-
-    include Native
+    include D3::Native
     alias_native :size
     alias_native :empty?, :empty
     alias_native :node
@@ -15,37 +10,8 @@ module D3
       `#@native.toString()`
     end
 
-    def text(new_value=nil, &block)
-      if block
-        @native.JS.text(block)
-        self
-      elsif new_value != nil
-        @native.JS.text(new_value)
-        self
-      else
-        @native.JS.text
-      end
-    end
-
-    def text=(new_value)
-      @native.JS.text(new_value)
-    end
-
-    def html(new_value=nil, &block)
-      if block
-        @native.JS.html(block)
-        self
-      elsif new_value != nil
-        @native.JS.html(new_value)
-        self
-      else
-        @native.JS.html
-      end
-    end
-
-    def html=(new_value)
-      @native.JS.html(new_value)
-    end
+    attribute_d3_block :text
+    attribute_d3_block :html
 
     def data(data=nil,key=nil,&block)
       if block

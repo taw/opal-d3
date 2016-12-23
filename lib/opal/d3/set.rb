@@ -1,15 +1,6 @@
 module D3
   class Set
-    def initialize(array=nil)
-      if block_given?
-        @native = `window.d3`.JS.set(array, proc{|x| yield(x)})
-      elsif array
-        @native = `window.d3`.JS.set(array)
-      else
-        @native = `window.d3`.JS.set()
-      end
-    end
-    include Native
+    include D3::Native
     alias_native :empty?, :empty
     alias_native :has?, :has
     alias_native :size
@@ -30,7 +21,13 @@ module D3
 
   class << self
     def set(array=nil, &block)
-      D3::Set.new(array, &block)
+      if block_given?
+        D3::Set.new @d3.JS.set(array, proc{|x| yield(x)})
+      elsif array
+        D3::Set.new @d3.JS.set(array)
+      else
+        D3::Set.new @d3.JS.set()
+      end
     end
   end
 end

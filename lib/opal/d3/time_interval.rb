@@ -1,10 +1,6 @@
 module D3
   class TimeInterval
-    include Native
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
+    include D3::Native
 
     alias_native :round
     alias_native :floor

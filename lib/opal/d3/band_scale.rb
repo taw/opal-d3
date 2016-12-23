@@ -1,11 +1,6 @@
 module D3
   class BandScale
-    include Native
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
-
+    include D3::Native
     def call(t)
       v = @native.call(t)
       `v === undefined ? nil : v`

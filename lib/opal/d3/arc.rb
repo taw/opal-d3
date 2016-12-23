@@ -1,10 +1,6 @@
 module D3
   class ArcGenerator
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
-
+    include D3::Native
     def call(*args)
       @native.call(*args)
     end
@@ -14,10 +10,7 @@ module D3
     attribute_d3_block :corner_radius, :cornerRadius
     attribute_d3_block :start_angle, :startAngle
     attribute_d3_block :end_angle, :endAngle
-
-    def centroid(*args)
-      @native.JS.centroid(*args)
-    end
+    alias_native :centroid
   end
 
   class << self

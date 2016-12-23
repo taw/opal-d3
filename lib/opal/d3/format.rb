@@ -1,9 +1,6 @@
 module D3
   class FormatSpecifier
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
+    include D3::Native
 
     FIELDS = %W[fill align sign symbol zero width comma precision type]
     FIELDS.each do |key|
@@ -30,10 +27,7 @@ module D3
   end
 
   class FormatLocale
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
+    include D3::Native
 
     def format(specifier)
       if specifier.is_a?(FormatSpecifier)

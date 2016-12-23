@@ -1,9 +1,6 @@
 module D3
   class RadialLineGenerator
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
+    include D3::Native
 
     def call(*args)
       result = @native.call(*args)

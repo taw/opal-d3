@@ -1,9 +1,6 @@
 module D3
   class Quad
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
+    include D3::Native
 
     def internal?
       `#@native.constructor === Array`
@@ -38,12 +35,7 @@ module D3
   end
 
   class QuadTree
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
-
-    include Native
+    include D3::Native
     alias_native :data
     alias_native :find
     alias_native :size

@@ -1,73 +1,11 @@
 require "opal"
 require "opal-parser"
-require "native"
 
 class Module
   def alias_d3(ruby_name, js_name=ruby_name)
     eval <<-EOF
       def #{ruby_name}(*args)
         @d3.JS.#{js_name}(*args)
-      end
-    EOF
-  end
-
-  # This provides ruby style and jquery style interfaces:
-  # obj.foo
-  # obj.foo = 1; obj.bar = 2
-  # obj.foo(1).bar(2)
-  def attribute_d3(ruby_name, js_name=ruby_name)
-    eval <<-EOF
-      def #{ruby_name}(new_value=`undefined`)
-        if `new_value !== undefined`
-          @native.JS.#{js_name}(new_value)
-          self
-        else
-          @native.JS.#{js_name}
-        end
-      end
-      def #{ruby_name}=(new_value)
-        @native.JS.#{js_name}(new_value)
-      end
-    EOF
-  end
-
-  # This provides ruby style and jquery style interfaces,
-  # and also block interface:
-  # obj.foo
-  # obj.foo = 1; obj.bar = 2
-  # obj.foo(1).bar(2).buzz{...}
-  def attribute_d3_block(ruby_name, js_name=ruby_name)
-    eval <<-EOF
-      def #{ruby_name}(new_value=`undefined`, &block)
-        if block_given?
-          @native.JS.#{js_name}(block)
-          self
-        elsif `new_value !== undefined`
-          @native.JS.#{js_name}(new_value)
-          self
-        else
-          @native.JS.#{js_name}
-        end
-      end
-      def #{ruby_name}=(new_value)
-        @native.JS.#{js_name}(new_value)
-      end
-    EOF
-  end
-
-  def alias_native_chainable(ruby_name, js_name=ruby_name)
-    eval <<-EOF
-      def #{ruby_name}(*args)
-        @native.JS.#{js_name}(*args)
-        self
-      end
-    EOF
-  end
-
-  def alias_native_new(ruby_name, js_name=ruby_name)
-    eval <<-EOF
-      def #{ruby_name}(*args)
-        self.class.new @native.JS.#{js_name}(*args)
       end
     EOF
   end
@@ -78,7 +16,10 @@ module D3
   class << self
   end
 end
+# Metaclass:
+require_relative "d3/native"
 
+# Everything else:
 require_relative "d3/arc"
 require_relative "d3/area"
 require_relative "d3/axis"

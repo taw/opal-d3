@@ -1,11 +1,6 @@
 module D3
   class TimeFormatLocale
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
-
-    include Native
+    include D3::Native
     alias_native :format, :format
     alias_native :parse, :parse
     alias_native :utc_format, :utcFormat

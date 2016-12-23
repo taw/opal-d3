@@ -1,10 +1,6 @@
 module D3
   class Axis
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
-
+    include D3::Native
     attribute_d3 :scale
     attribute_d3 :tick_size_inner, :tickSizeInner
     attribute_d3 :tick_size_outer, :tickSizeOuter

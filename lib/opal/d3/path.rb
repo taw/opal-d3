@@ -1,10 +1,7 @@
 module D3
   class Path
-    def initialize
-      @native = `window.d3.path()`
-    end
+    include D3::Native
 
-    include Native
     # D3 methods aren't chainable, but there's no reason why they shouldn't be
     alias_native_chainable :move_to, :moveTo
     alias_native_chainable :close_path, :closePath
@@ -19,7 +16,7 @@ module D3
 
   class << self
     def path
-      D3::Path.new
+      D3::Path.new @d3.JS.path
     end
   end
 end

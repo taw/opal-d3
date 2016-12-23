@@ -1,9 +1,6 @@
 module D3
   class PieGenerator
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
+    include D3::Native
   end
 
   class << self

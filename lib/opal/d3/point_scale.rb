@@ -1,10 +1,6 @@
 module D3
   class PointScale
-    include Native
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
+    include D3::Native
 
     def call(t)
       v = @native.call(t)

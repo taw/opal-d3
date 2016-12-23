@@ -1,11 +1,6 @@
 module D3
   class ThresholdScale
-    include Native
-    def initialize(native)
-      raise unless native
-      @native = native
-    end
-
+    include D3::Native
     attribute_d3 :domain
     attribute_d3 :range
     alias_native_new :copy

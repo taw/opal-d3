@@ -1,8 +1,6 @@
 module D3
   class EasePoly
-    def initialize(native)
-      @native = native
-    end
+    include D3::Native
     alias_native_new :exponent
 
     def call(t)
@@ -11,9 +9,7 @@ module D3
   end
 
   class EaseBack
-    def initialize(native)
-      @native = native
-    end
+    include D3::Native
     alias_native_new :overshoot
 
     def call(t)
@@ -22,10 +18,7 @@ module D3
   end
 
   class EaseElastic
-    def initialize(native)
-      @native = native
-    end
-
+    include D3::Native
     alias_native_new :amplitude
     alias_native_new :period
 
