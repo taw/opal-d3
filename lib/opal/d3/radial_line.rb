@@ -4,6 +4,13 @@ module D3
       raise unless native
       @native = native
     end
+
+    def call(*args)
+      @native.call(*args)
+    end
+
+    attribute_d3_block :angle
+    attribute_d3_block :radius
   end
 
   class << self
