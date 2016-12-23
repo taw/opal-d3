@@ -2,4 +2,35 @@ describe "d3 - line" do
   it "d3.line" do
     expect(D3.line).to be_instance_of(D3::LineGenerator)
   end
+
+  let(:simple_data) { [[1,2],[3,5],[4,9]] }
+
+  it "basics" do
+    line = D3.line
+    expect(line.(simple_data)).to eq("M1,2L3,5L4,9")
+  end
+
+  it "x/y accessors" do
+    line = D3.line
+    line.x{|(x,y)| x*10}.y{|(x,y)| y*100}
+    expect(line.x.([23,42])).to eq(230)
+    expect(line.y.([23,42])).to eq(4200)
+    expect(line.(simple_data)).to eq("M10,200L30,500L40,900")
+  end
+
+  it ".x constant" do
+    line = D3.line.x(10)
+    expect(line.(simple_data)).to eq("M10,2L10,5L10,9")
+    expect(line.x.(42)).to eq(10)
+    line.x = 20
+    expect(line.x.(42)).to eq(20)
+  end
+
+  it ".y constant" do
+    line = D3.line.y(10)
+    expect(line.(simple_data)).to eq("M1,10L3,10L4,10")
+    expect(line.y.(42)).to eq(10)
+    line.y = 20
+    expect(line.y.(42)).to eq(20)
+  end
 end
