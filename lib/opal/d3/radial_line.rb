@@ -6,7 +6,8 @@ module D3
     end
 
     def call(*args)
-      @native.call(*args)
+      result = @native.call(*args)
+      `result === null ? nil : result`
     end
 
     attribute_d3_block :angle

@@ -6,11 +6,13 @@ module D3
     end
 
     def call(*args)
-      @native.call(*args)
+      result = @native.call(*args)
+      `result === null ? nil : result`
     end
 
     attribute_d3_block :x
     attribute_d3_block :y
+    attribute_d3_block :defined
   end
 
   class << self

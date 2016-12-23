@@ -4,6 +4,7 @@ describe "d3 - line" do
   end
 
   let(:simple_data) { [[1,2],[3,5],[4,9]] }
+  let(:extended_data) { [[1,2],[3,5],[4,9],[6,10],[7,8]] }
 
   it "basics" do
     line = D3.line
@@ -32,5 +33,14 @@ describe "d3 - line" do
     expect(line.y.(42)).to eq(10)
     line.y = 20
     expect(line.y.(42)).to eq(20)
+  end
+
+  it ".defined" do
+    expect(D3.line.defined(false).(simple_data)).to eq(nil)
+    expect(D3.line.defined{false}.(simple_data)).to eq(nil)
+    expect(D3.line.defined(true).(simple_data)).to eq("M1,2L3,5L4,9")
+    expect(D3.line.defined{true}.(simple_data)).to eq("M1,2L3,5L4,9")
+    expect(D3.line.(extended_data)).to eq("M1,2L3,5L4,9L6,10L7,8")
+    expect(D3.line.defined{|(x,y)| x.odd?}.(extended_data)).to eq("M1,2L3,5M7,8Z")
   end
 end
