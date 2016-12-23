@@ -9,6 +9,7 @@ module D3
 
     attribute_d3_block :angle
     attribute_d3_block :radius
+    attribute_d3_block :defined
   end
 
   class << self

@@ -33,4 +33,10 @@ describe "d3 - radial line" do
     radial_line.radius = 20
     expect(radial_line.radius.(42)).to eq(20)
   end
+
+  it ".defined" do
+    radial_line = D3.radial_line.defined{|(a,r)| r.even?}
+    data = [[0,6], [0,10], [0,11], [0,14], [0,16], [0,19]]
+    expect(radial_line.(data)).to eq("M0,-6L0,-10M0,-14L0,-16")
+  end
 end
