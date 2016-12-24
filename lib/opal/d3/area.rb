@@ -1,6 +1,32 @@
 module D3
   class AreaGenerator
     include D3::Native
+
+    def call(*args)
+      result = @native.call(*args)
+      `result === null ? nil : result`
+    end
+
+    attribute_d3_block :x
+    attribute_d3_block :x0
+    attribute_d3_block :x1
+    attribute_d3_block :y
+    attribute_d3_block :y0
+    attribute_d3_block :y1
+    attribute_d3_block :defined
+
+    def line_x0
+      D3::LineGenerator.new @native.JS.lineX0
+    end
+    def line_x1
+      D3::LineGenerator.new @native.JS.lineX1
+    end
+    def line_y0
+      D3::LineGenerator.new @native.JS.lineY0
+    end
+    def line_y1
+      D3::LineGenerator.new @native.JS.lineY1
+    end
   end
 
   class << self
