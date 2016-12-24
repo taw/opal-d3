@@ -4,27 +4,36 @@ require "data/london_population"
 
 svg = D3.select("#visualization")
         .append("svg")
-        .attr("height", "400px")
+        .attr("height", "500px")
         .attr("width", "100%")
 
-x = D3.scale_linear.domain([1801, 2011]).range([0, svg.style("width").to_i])
-y = D3.scale_linear.domain([0, 9_000_000]).range([0, 400])
+width = svg.style("width").to_i
+
+x = D3.scale_linear.domain([1801, 2011]).range([0, width-60])
+y = D3.scale_linear.domain([0, 9_000_000]).range([400, 0])
 
 greater_area = D3.area
             .x{|d| x.(d[:year]) }
             .y0(400)
-            .y1{|d| 400 - y.(d[:greater])}
+            .y1{|d| y.(d[:greater])}
             .curve(D3.curve_natural)
 
 inner_area = D3.area
             .x{|d| x.(d[:year]) }
             .y0(400)
-            .y1{|d| 400 - y.(d[:inner])}
+            .y1{|d| y.(d[:inner])}
             .curve(D3.curve_natural)
 
-svg.append("path")
+graph_area = svg.append("g")
+    .attr("transform", "translate(60, 20)")
+graph_area.append("path")
     .attr("d", greater_area.(LondonPopulation))
     .attr("fill", "pink")
-svg.append("path")
+graph_area.append("path")
     .attr("d", inner_area.(LondonPopulation))
     .attr("fill", "steelblue")
+
+axis_bottom = D3.axis_bottom(x.to_n)
+axis_left = D3.axis_left(y.to_n)
+graph_area.call(axis_left)
+graph_area.append("g").attr("transform", "translate(0, 400)").call(axis_bottom)
