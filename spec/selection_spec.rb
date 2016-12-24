@@ -86,13 +86,13 @@ describe "d3 - selection" do
         .data(data)
         .enter
         .append("li")
-        .text{|d| d[:name]}
+        .html{|d| "<b>#{d[:name]}</b>"}
         .style("font-size"){|d| "#{d[:value]}px"}
       expect(html).to eq([
         %Q[<ul>],
-        %Q[<li style="font-size: 10px;">A</li>],
-        %Q[<li style="font-size: 20px;">B</li>],
-        %Q[<li style="font-size: 30px;">C</li>],
+        %Q[<li style="font-size: 10px;"><b>A</b></li>],
+        %Q[<li style="font-size: 20px;"><b>B</b></li>],
+        %Q[<li style="font-size: 30px;"><b>C</b></li>],
         %Q[</ul>],
       ].join)
     end
