@@ -3,6 +3,18 @@ module D3
     include D3::Native
   end
 
+  class CurveBundle < Curve
+    alias_native_new :beta
+  end
+
+  class CurveCardinal < Curve
+    alias_native_new :tension
+  end
+
+  class CurveCatmullRom < Curve
+    alias_native_new :alpha
+  end
+
   class << self
     def curve_basis
       D3::Curve.new `window.d3.curveBasis`
@@ -14,25 +26,25 @@ module D3
       D3::Curve.new `window.d3.curveBasisOpen`
     end
     def curve_bundle
-      D3::Curve.new `window.d3.curveBundle`
+      D3::CurveBundle.new `window.d3.curveBundle`
     end
     def curve_cardinal
-      D3::Curve.new `window.d3.curveCardinal`
+      D3::CurveCardinal.new `window.d3.curveCardinal`
     end
     def curve_cardinal_closed
-      D3::Curve.new `window.d3.curveCardinalClosed`
+      D3::CurveCardinal.new `window.d3.curveCardinalClosed`
     end
     def curve_cardinal_open
-      D3::Curve.new `window.d3.curveCardinalOpen`
+      D3::CurveCardinal.new `window.d3.curveCardinalOpen`
     end
     def curve_catmull_rom
-      D3::Curve.new `window.d3.curveCatmullRom`
+      D3::CurveCatmullRom.new `window.d3.curveCatmullRom`
     end
     def curve_catmull_rom_closed
-      D3::Curve.new `window.d3.curveCatmullRomClosed`
+      D3::CurveCatmullRom.new `window.d3.curveCatmullRomClosed`
     end
     def curve_catmull_rom_open
-      D3::Curve.new `window.d3.curveCatmullRomOpen`
+      D3::CurveCatmullRom.new `window.d3.curveCatmullRomOpen`
     end
     def curve_linear
       D3::Curve.new `window.d3.curveLinear`
