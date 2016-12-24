@@ -15,15 +15,27 @@ module D3
     attribute_d3_block :outer_radius, :outerRadius
     attribute_d3_block :defined
 
+    def curve(new_value=`undefined`)
+      if `new_value === undefined`
+        D3::Curve.new @native.JS.curve
+      else
+        @native.JS.curve(new_value.to_n)
+        self
+      end
+    end
+
     def line_start_angle
       D3::RadialLineGenerator.new @native.JS.lineStartAngle
     end
+
     def line_end_angle
       D3::RadialLineGenerator.new @native.JS.lineEndAngle
     end
+
     def line_inner_radius
       D3::RadialLineGenerator.new @native.JS.lineInnerRadius
     end
+
     def line_outer_radius
       D3::RadialLineGenerator.new @native.JS.lineOuterRadius
     end

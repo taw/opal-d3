@@ -6,8 +6,16 @@ describe "d3 - radial line" do
   let(:simple_data) { [[0,2],[Math::PI*0.10,5],[Math::PI*0.20,3]] }
 
   it "basics" do
-    radial_line = D3.radial_line
-    expect(radial_line.(simple_data)).to eq("M0,-2L1.545084971874737,-4.755282581475767L1.7633557568774194,-2.4270509831248424")
+    expect(D3.radial_line.(simple_data)).to eq("M0,-2L1.545084971874737,-4.755282581475767L1.7633557568774194,-2.4270509831248424")
+  end
+
+  it "curve" do
+    expect(D3.radial_line.curve).to be_instance_of(D3::Curve)
+    expect(D3.radial_line.curve(D3.curve_natural).(simple_data)).to eq(%W[
+      M0,-2
+      C0.6255961728642502,-3.3420537088108135,1.2511923457285004,-4.684107417621627,1.545084971874737,-4.755282581475767
+      C1.8389775980209737,-4.826457745329908,1.8011666774491966,-3.626754364227375,1.7633557568774194,-2.4270509831248424
+    ].join)
   end
 
   it "angle/radius accessors" do

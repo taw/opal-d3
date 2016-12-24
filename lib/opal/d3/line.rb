@@ -10,6 +10,15 @@ module D3
     attribute_d3_block :x
     attribute_d3_block :y
     attribute_d3_block :defined
+
+    def curve(new_value=`undefined`)
+      if `new_value === undefined`
+        D3::Curve.new @native.JS.curve
+      else
+        @native.JS.curve(new_value.to_n)
+        self
+      end
+    end
   end
 
   class << self

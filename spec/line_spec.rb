@@ -7,8 +7,16 @@ describe "d3 - line" do
   let(:extended_data) { [[1,2],[3,5],[4,9],[6,10],[7,8]] }
 
   it "basics" do
-    line = D3.line
-    expect(line.(simple_data)).to eq("M1,2L3,5L4,9")
+    expect(D3.line.(simple_data)).to eq("M1,2L3,5L4,9")
+  end
+
+  it "curve" do
+    expect(D3.line.curve).to be_instance_of(D3::Curve)
+    expect(D3.line.curve(D3.curve_natural).(simple_data)).to eq(%W[
+      M1,2
+      C1.75,2.9166666666666665,2.5,3.833333333333333,3,5
+      C3.5,6.166666666666667,3.75,7.583333333333334,4,9
+    ].join)
   end
 
   it "x/y accessors" do
