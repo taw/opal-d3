@@ -1,6 +1,32 @@
 module D3
   class RadialAreaGenerator
     include D3::Native
+
+    def call(*args)
+      result = @native.call(*args)
+      `result === null ? nil : result`
+    end
+
+    attribute_d3_block :angle
+    attribute_d3_block :start_angle, :startAngle
+    attribute_d3_block :end_angle, :endAngle
+    attribute_d3_block :radius
+    attribute_d3_block :inner_radius, :innerRadius
+    attribute_d3_block :outer_radius, :outerRadius
+    attribute_d3_block :defined
+
+    def line_start_angle
+      D3::RadialLineGenerator.new @native.JS.lineStartAngle
+    end
+    def line_end_angle
+      D3::RadialLineGenerator.new @native.JS.lineEndAngle
+    end
+    def line_inner_radius
+      D3::RadialLineGenerator.new @native.JS.lineInnerRadius
+    end
+    def line_outer_radius
+      D3::RadialLineGenerator.new @native.JS.lineOuterRadius
+    end
   end
 
   class << self
