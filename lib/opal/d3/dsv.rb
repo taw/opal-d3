@@ -27,6 +27,8 @@ module D3
     end
 
     alias_native :format_rows, :formatRows
+
+    alias_native :format
   end
 
   class << self
@@ -88,6 +90,14 @@ module D3
       else
         @d3.JS.tsvParse(string).map{|e| `Opal.hash(e)` }
       end
+    end
+
+    def csv_format(rows, columns=`undefined`)
+      @d3.JS.csvFormat(rows.to_n, columns)
+    end
+
+    def tsv_format(rows, columns=`undefined`)
+      @d3.JS.tsvFormat(rows.to_n, columns)
     end
   end
 end

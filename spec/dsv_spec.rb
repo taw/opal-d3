@@ -21,6 +21,12 @@ describe "d3 - dsv" do
       ["2000", "Mercury", "Cougar", "2.38"],
     ]
   }
+  let(:objs_example) {
+    [
+      {"Year"=>"1997", "Make"=>"Ford", "Model"=>"E350", "Length"=>"2.34"},
+      {"Year"=>"2000", "Make"=>"Mercury", "Model"=>"Cougar", "Length"=>"2.38"},
+    ]
+  }
   let(:csv_format) { D3.dsv_format(",") }
   let(:tsv_format) { D3.dsv_format("\t") }
   let(:dsv_format) { D3.dsv_format(";") }
@@ -105,10 +111,7 @@ describe "d3 - dsv" do
 
   # We have ways to enforce proper Hash order, maybe it's a good idea
   it "dsv_format.parse" do
-    expect(dsv_format.parse(dsv_example)).to eq([
-      {"Year"=>"1997", "Make"=>"Ford", "Model"=>"E350", "Length"=>"2.34"},
-      {"Year"=>"2000", "Make"=>"Mercury", "Model"=>"Cougar", "Length"=>"2.38"},
-    ])
+    expect(dsv_format.parse(dsv_example)).to eq(objs_example)
     expect(dsv_format.parse(dsv_example, format_obj)).to eq(
            dsv_format.parse(dsv_example, &format_obj))
     expect(dsv_format.parse(dsv_example, &format_obj)).to eq([
@@ -153,5 +156,39 @@ describe "d3 - dsv" do
            tsv_format.parse(tsv_example, filter_obj))
     expect(D3.tsv_parse(tsv_example, &filter_obj)).to eq(
           tsv_format.parse(tsv_example, &filter_obj))
+  end
+
+  # Same awful idea of not including final \n
+  it "dsv_format.format" do
+    expect(dsv_format.format(objs_example)).to eq(dsv_example.chomp)
+    expect(dsv_format.format(objs_example, ["Year", "Make", "Speed"])).to eq(
+      "Year;Make;Speed\n"+
+      "1997;Ford;\n"+
+      "2000;Mercury;"
+    )
+  end
+
+  it "d3.tsv_format" do
+    expect(tsv_format.format(objs_example, ["Year", "Make", "Speed"])).to eq(
+      "Year\tMake\tSpeed\n"+
+      "1997\tFord\t\n"+
+      "2000\tMercury\t"
+    )
+    expect(tsv_format.format(objs_example)).to eq(
+           D3.tsv_format(objs_example))
+    expect(tsv_format.format(objs_example, ["Year", "Make", "Speed"])).to eq(
+           D3.tsv_format(objs_example, ["Year", "Make", "Speed"]))
+  end
+
+  it "d3.csv_format" do
+    expect(csv_format.format(objs_example, ["Year", "Make", "Speed"])).to eq(
+      "Year,Make,Speed\n"+
+      "1997,Ford,\n"+
+      "2000,Mercury,"
+    )
+    expect(csv_format.format(objs_example)).to eq(
+           D3.csv_format(objs_example))
+    expect(csv_format.format(objs_example, ["Year", "Make", "Speed"])).to eq(
+           D3.csv_format(objs_example, ["Year", "Make", "Speed"]))
   end
 end
