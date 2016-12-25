@@ -3,12 +3,26 @@ module D3
     include D3::Native
 
     def parse_rows(string, row=`undefined`, &block)
-      if block_given?
-        @native.JS.parseRows(string, block)
-      elsif `row !== undefined`
-        @native.JS.parseRows(string, row)
+      row = block if block_given?
+      if `row !== undefined`
+        @native.JS.parseRows(string, proc{|d|
+          result = row.call(d)
+          result == nil ? `null` : result
+        })
       else
         @native.JS.parseRows(string)
+      end
+    end
+
+    def parse(string, row=`undefined`, &block)
+      row = block if block_given?
+      if `row !== undefined`
+        @native.JS.parse(string, proc{|e|
+          result = row.call(`Opal.hash(e)`)
+          result == nil ? `null` : result
+        })
+      else
+        @native.JS.parse(string).map{|e| `Opal.hash(e)` }
       end
     end
 
@@ -21,20 +35,24 @@ module D3
     end
 
     def csv_parse_rows(string, row=`undefined`, &block)
-      if block_given?
-        @d3.JS.csvParseRows(string, block)
-      elsif `row !== undefined`
-        @d3.JS.csvParseRows(string, row)
+      row = block if block_given?
+      if `row !== undefined`
+        @d3.JS.csvParseRows(string, proc{|d|
+          result = row.call(d)
+          result == nil ? `null` : result
+        })
       else
         @d3.JS.csvParseRows(string)
       end
     end
 
     def tsv_parse_rows(string, row=`undefined`, &block)
-      if block_given?
-        @d3.JS.tsvParseRows(string, block)
-      elsif `row !== undefined`
-        @d3.JS.tsvParseRows(string, row)
+      row = block if block_given?
+      if `row !== undefined`
+        @d3.JS.tsvParseRows(string, proc{|d|
+          result = row.call(d)
+          result == nil ? `null` : result
+        })
       else
         @d3.JS.tsvParseRows(string)
       end
@@ -46,6 +64,30 @@ module D3
 
     def tsv_format_rows(rows)
       @d3.JS.tsvFormatRows(rows)
+    end
+
+    def csv_parse(string, row=`undefined`, &block)
+      row = block if block_given?
+      if `row !== undefined`
+        @d3.JS.csvParse(string, proc{|e|
+          result = row.call(`Opal.hash(e)`)
+          result == nil ? `null` : result
+        })
+      else
+        @d3.JS.csvParse(string).map{|e| `Opal.hash(e)` }
+      end
+    end
+
+    def tsv_parse(string, row=`undefined`, &block)
+      row = block if block_given?
+      if `row !== undefined`
+        @d3.JS.tsvParse(string, proc{|e|
+          result = row.call(`Opal.hash(e)`)
+          result == nil ? `null` : result
+        })
+      else
+        @d3.JS.tsvParse(string).map{|e| `Opal.hash(e)` }
+      end
     end
   end
 end

@@ -24,7 +24,18 @@ describe "d3 - dsv" do
   let(:csv_format) { D3.dsv_format(",") }
   let(:tsv_format) { D3.dsv_format("\t") }
   let(:dsv_format) { D3.dsv_format(";") }
-  let(:format) { proc{|d| [:converted, d] } }
+  let(:format_row) { proc{|(y,f,m,l)|
+    ["converted", (Integer(y) rescue y), f, m, (Float(l) rescue l)]
+  }}
+  let(:filter_row) { proc{|d|
+    format_row.(d) if d[0] == "2000" or d[0] == "1997"
+  }}
+  let(:format_obj) { proc{|o|
+    {y: o["Year"].to_i, f:o["Make"], m:o["Model"], l:o["Length"].to_f}
+  }}
+  let(:filter_obj) { proc{|o|
+    format_obj.(o) if o["Year"] == "2000"
+  }}
 
   it "d3.dsv_format" do
     expect(D3.dsv_format(";")).to be_instance_of(D3::DsvFormat)
@@ -32,13 +43,17 @@ describe "d3 - dsv" do
 
   it "dsv_format.parse_rows" do
     expect(dsv_format.parse_rows(dsv_example)).to eq(rows_example)
-    expect(dsv_format.parse_rows(dsv_example, format)).to eq(
-           dsv_format.parse_rows(dsv_example, &format)
+    expect(dsv_format.parse_rows(dsv_example, format_row)).to eq(
+           dsv_format.parse_rows(dsv_example, &format_row)
     )
-    expect(dsv_format.parse_rows(dsv_example, format)).to eq([
-      ["converted", ["Year", "Make", "Model", "Length"]],
-      ["converted", ["1997", "Ford", "E350", "2.34"]],
-      ["converted", ["2000", "Mercury", "Cougar", "2.38"]],
+    expect(dsv_format.parse_rows(dsv_example, format_row)).to eq([
+      ["converted", "Year", "Make", "Model", "Length"],
+      ["converted", 1997, "Ford", "E350", 2.34],
+      ["converted", 2000, "Mercury", "Cougar", 2.38],
+    ])
+    expect(dsv_format.parse_rows(dsv_example, filter_row)).to eq([
+      ["converted", 1997, "Ford", "E350", 2.34],
+      ["converted", 2000, "Mercury", "Cougar", 2.38],
     ])
   end
 
@@ -47,21 +62,29 @@ describe "d3 - dsv" do
            csv_format.parse_rows(csv_example))
     expect(dsv_format.parse_rows(dsv_example)).to eq(
            csv_format.parse_rows(csv_example))
-    expect(D3.csv_parse_rows(csv_example, format)).to eq(
-           csv_format.parse_rows(csv_example, format))
-    expect(D3.csv_parse_rows(csv_example, &format)).to eq(
-           csv_format.parse_rows(csv_example, &format))
+    expect(D3.csv_parse_rows(csv_example, format_row)).to eq(
+           csv_format.parse_rows(csv_example, format_row))
+    expect(D3.csv_parse_rows(csv_example, &format_row)).to eq(
+           csv_format.parse_rows(csv_example, &format_row))
+    expect(D3.csv_parse_rows(csv_example, filter_row)).to eq(
+           csv_format.parse_rows(csv_example, filter_row))
+    expect(D3.csv_parse_rows(csv_example, &filter_row)).to eq(
+           csv_format.parse_rows(csv_example, &filter_row))
   end
 
   it "d3.tsv_parse_rows" do
     expect(D3.tsv_parse_rows(tsv_example)).to eq(
            tsv_format.parse_rows(tsv_example))
-    expect(tsv_format.parse_rows(tsv_example)).to eq(
-           csv_format.parse_rows(csv_example))
-    expect(D3.tsv_parse_rows(tsv_example, format)).to eq(
-           tsv_format.parse_rows(tsv_example, format))
-    expect(D3.tsv_parse_rows(tsv_example, &format)).to eq(
-           tsv_format.parse_rows(tsv_example, &format))
+    expect(dsv_format.parse_rows(dsv_example)).to eq(
+           tsv_format.parse_rows(tsv_example))
+    expect(D3.tsv_parse_rows(tsv_example, format_row)).to eq(
+           tsv_format.parse_rows(tsv_example, format_row))
+    expect(D3.tsv_parse_rows(tsv_example, &format_row)).to eq(
+           tsv_format.parse_rows(tsv_example, &format_row))
+    expect(D3.tsv_parse_rows(tsv_example, filter_row)).to eq(
+           tsv_format.parse_rows(tsv_example, filter_row))
+    expect(D3.tsv_parse_rows(tsv_example, &filter_row)).to eq(
+          tsv_format.parse_rows(tsv_example, &filter_row))
   end
 
   # It's awful practice not to include final \n,
@@ -78,5 +101,57 @@ describe "d3 - dsv" do
   it "d3.tsv_format_rows" do
     expect(tsv_format.format_rows(rows_example)).to eq(tsv_example.chomp)
     expect(D3.tsv_format_rows(rows_example)).to eq(tsv_example.chomp)
+  end
+
+  # We have ways to enforce proper Hash order, maybe it's a good idea
+  it "dsv_format.parse" do
+    expect(dsv_format.parse(dsv_example)).to eq([
+      {"Year"=>"1997", "Make"=>"Ford", "Model"=>"E350", "Length"=>"2.34"},
+      {"Year"=>"2000", "Make"=>"Mercury", "Model"=>"Cougar", "Length"=>"2.38"},
+    ])
+    expect(dsv_format.parse(dsv_example, format_obj)).to eq(
+           dsv_format.parse(dsv_example, &format_obj))
+    expect(dsv_format.parse(dsv_example, &format_obj)).to eq([
+      {"y"=>1997, "f"=>"Ford", "m"=>"E350", "l"=>2.34},
+      {"y"=>2000, "f"=>"Mercury", "m"=>"Cougar", "l"=>2.38},
+    ])
+  end
+
+  it "dsv_format.parse - filtering" do
+    expect(dsv_format.parse(dsv_example, &filter_obj)).to eq(
+           dsv_format.parse(dsv_example, filter_obj))
+    expect(dsv_format.parse(dsv_example, &filter_obj)).to eq([
+      {"y"=>2000, "f"=>"Mercury", "m"=>"Cougar", "l"=>2.38},
+    ])
+  end
+
+  it "d3.csv_parse" do
+    expect(D3.csv_parse(csv_example)).to eq(
+           csv_format.parse(csv_example))
+    expect(dsv_format.parse(dsv_example)).to eq(
+           csv_format.parse(csv_example))
+    expect(D3.csv_parse(csv_example, format_obj)).to eq(
+           csv_format.parse(csv_example, format_obj))
+    expect(D3.csv_parse(csv_example, &format_obj)).to eq(
+           csv_format.parse(csv_example, &format_obj))
+    expect(D3.csv_parse(csv_example, filter_obj)).to eq(
+           csv_format.parse(csv_example, filter_obj))
+    expect(D3.csv_parse(csv_example, &filter_obj)).to eq(
+          csv_format.parse(csv_example, &filter_obj))
+  end
+
+  it "d3.tsv_parse" do
+    expect(D3.tsv_parse(tsv_example)).to eq(
+           tsv_format.parse(tsv_example))
+    expect(dsv_format.parse(dsv_example)).to eq(
+           tsv_format.parse(tsv_example))
+    expect(D3.tsv_parse(tsv_example, format_obj)).to eq(
+           tsv_format.parse(tsv_example, format_obj))
+    expect(D3.tsv_parse(tsv_example, &format_obj)).to eq(
+           tsv_format.parse(tsv_example, &format_obj))
+    expect(D3.tsv_parse(tsv_example, filter_obj)).to eq(
+           tsv_format.parse(tsv_example, filter_obj))
+    expect(D3.tsv_parse(tsv_example, &filter_obj)).to eq(
+          tsv_format.parse(tsv_example, &filter_obj))
   end
 end
