@@ -29,6 +29,14 @@ describe "d3 - dsv" do
       ["1997", "Ford", "E350", "2.34"],
       ["2000", "Mercury", "Cougar", "2.38"],
     ])
+    expect(dsv_format.parse_rows(dsv_example, format)).to eq(
+           dsv_format.parse_rows(dsv_example, &format)
+    )
+    expect(dsv_format.parse_rows(dsv_example, format)).to eq([
+      ["converted", ["Year", "Make", "Model", "Length"]],
+      ["converted", ["1997", "Ford", "E350", "2.34"]],
+      ["converted", ["2000", "Mercury", "Cougar", "2.38"]],
+    ])
   end
 
   it "d3.csv_parse_rows" do
