@@ -11,6 +11,8 @@ module D3
         @native.JS.parseRows(string)
       end
     end
+
+    alias_native :format_rows, :formatRows
   end
 
   class << self
@@ -36,6 +38,14 @@ module D3
       else
         @d3.JS.tsvParseRows(string)
       end
+    end
+
+    def csv_format_rows(rows)
+      @d3.JS.csvFormatRows(rows)
+    end
+
+    def tsv_format_rows(rows)
+      @d3.JS.tsvFormatRows(rows)
     end
   end
 end
