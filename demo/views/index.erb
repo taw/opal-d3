@@ -8,11 +8,11 @@
 </head>
 <body>
   <div class="container">
+    <h1>opal-d3 demos</h1>
     <ul>
-      <li><a href="/v/elections_2016">Elections 2016 &mdash; basic DOM manipulation</a></li>
-      <li><a href="/v/london_population">London Population &mdash; basic SVG shapes</a></li>
-      <li><a href="/v/london_population_area">London Population &mdash; area chart with axes</a></li>
-      <li><a href="/v/olympics_2016_medals">Olympics 2016 medals &mdash; stacked bar charts</a></li>
+      <% visualizations.each do |script, title| %>
+        <li><a href="/v/<%= script %>"><%= title %></a></li>
+      <% end %>
     </ul>
   </div>
 </body>

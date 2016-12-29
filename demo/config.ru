@@ -10,21 +10,22 @@ map "/assets" do
   run opal.sprockets
 end
 
-get "/" do
-  send_file "index.html"
-end
-
-visualization_titles = {
+visualizations = {
   elections_2016: "Elections 2016",
 	london_population: "London Population",
 	london_population_area: "London Population - Area Chart",
 	olympics_2016_medals: "Olympics 2016 Medals",
 }
 
-visualization_titles.each do |script, title|
+visualizations.each do |script, title|
   get "/v/#{script}" do
     erb :visualization, {}, {script: script, title: title}
   end
 end
+
+get "/" do
+  erb :index, {}, {visualizations: visualizations}
+end
+
 
 run Sinatra::Application
