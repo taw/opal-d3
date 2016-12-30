@@ -8,8 +8,9 @@ svg = D3.select("#visualization")
         .attr("width", "100%")
 width = svg.style("width").to_i
 
-x = D3.scale_linear.domain(IPhoneVariants.map(&:released).minmax).range([20,width-80]).nice
+x = D3.scale_linear.domain(IPhoneVariants.map(&:released).minmax).range([20,width-90]).nice
 y = D3.scale_log.domain(IPhoneVariants.map(&:size).minmax).range([380,20])
+c = D3.scale_ordinal.range(D3.scheme_category_10)
 
 graph_area = svg.append("g")
     .attr("transform", "translate(60, 20)")
@@ -19,7 +20,7 @@ graph_area.select_all("circle")
     .attr("cx"){|d| x.(d.released)}
     .attr("cy"){|d| y.(d.size)}
     .attr("r", 10)
-    .attr("fill", "blue")
+    .attr("fill"){|d| c.(d.name)}
 
 axis_bottom = D3.axis_bottom(x)
   .tick_format(D3.time_format("%Y-%m-%d"))

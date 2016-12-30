@@ -16,8 +16,8 @@ IPhones = [
   ["iPhone 6S",      "2015-09-25", [16,32,64,128]],
   ["iPhone 6S Plus", "2015-09-25", [16,32,64,128]],
   ["iPhone SE",      "2016-03-31", [16,64]],
-  ["iPhone 7",       "2016-09-16", [32, 128, 256]],
-  ["iPhone 7 Plus",  "2016-09-16", [32, 128, 256]],
+  ["iPhone 7",       "2016-09-16", [32,128,256]],
+  ["iPhone 7 Plus",  "2016-09-16", [32,128,256]],
 ].map{|n,d,s|
   OpenStruct.new(name: n, released: Time.parse(d), sizes: s)
 }
