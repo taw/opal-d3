@@ -15,6 +15,7 @@ visualizations = {
 	london_population: "London Population",
 	london_population_area: "London Population - Area Chart",
 	olympics_2016_medals: "Olympics 2016 Medals",
+  iphones: "iPhones",
 }
 
 visualizations.each do |script, title|
@@ -26,6 +27,5 @@ end
 get "/" do
   erb :index, {}, {visualizations: visualizations}
 end
-
 
 run Sinatra::Application
