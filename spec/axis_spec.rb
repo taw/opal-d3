@@ -78,8 +78,8 @@ describe "d3 - axis" do
 
     it "set/get" do
       context = D3.select("#test-area").append("svg")
-      axis.tick_values = [0,20_000_000,40_000_000]
-      expect(axis.tick_values).to eq([0,20_000_000,40_000_000])
+      axis.tick_values = [0, 20_000_000, 40_000_000]
+      expect(axis.tick_values).to eq([0, 20_000_000, 40_000_000])
       axis.(context)
       expect(D3.select("#test-area").html).to eq([
         '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
@@ -91,6 +91,42 @@ describe "d3 - axis" do
       ].join)
       axis.tick_values(nil)
       expect(axis.tick_values).to eq(nil)
+    end
+  end
+
+  describe "axis.tick_format" do
+    let(:scale) { D3.scale_linear.domain([0,80_000]).range([0,800]) }
+    it "basics" do
+      context = D3.select("#test-area").append("svg")
+      expect(axis.tick_format).to eq(nil)
+      axis.tick_values = [0, 20_000, 40_000]
+      axis.tick_format = D3.format(",.2f")
+      axis.(context)
+      expect(D3.select("#test-area").html).to eq([
+        '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
+        '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
+        '<g class="tick" opacity="1" transform="translate(0,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">0.00</text></g>',
+        '<g class="tick" opacity="1" transform="translate(200,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">20,000.00</text></g>',
+        '<g class="tick" opacity="1" transform="translate(400,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">40,000.00</text></g>',
+        '</svg>',
+      ].join)
+    end
+
+    it "block" do
+      context = D3.select("#test-area").append("svg")
+      expect(axis.tick_format).to eq(nil)
+      axis.tick_values = [0, 20_000, 40_000]
+      axis.tick_format{|d| "#{d}x"}
+      expect(axis.tick_format.(5)).to eq("5x")
+      axis.(context)
+      expect(D3.select("#test-area").html).to eq([
+        '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
+        '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
+        '<g class="tick" opacity="1" transform="translate(0,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">0x</text></g>',
+        '<g class="tick" opacity="1" transform="translate(200,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">20000x</text></g>',
+        '<g class="tick" opacity="1" transform="translate(400,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">40000x</text></g>',
+        '</svg>',
+      ].join)
     end
   end
 end

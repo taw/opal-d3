@@ -41,6 +41,18 @@ module D3
       end
     end
     alias_method :tick_values=, :tick_values
+
+    def tick_format(v=`undefined`, &block)
+      v = block if block_given?
+      if `v === undefined`
+        result = @native.JS.tickFormat
+        `result === null ? nil : result`
+      else
+        @native.JS.tickFormat(v == nil ? `null` : v)
+        self
+      end
+    end
+    alias_method :tick_format=, :tick_format
   end
 
   class << self
