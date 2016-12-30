@@ -14,6 +14,7 @@ module D3
     attribute_d3 :tick_size_outer, :tickSizeOuter
     attribute_d3 :tick_size, :tickSize
     attribute_d3 :tick_padding, :tickPadding
+    alias_native_chainable :ticks
 
     def call(context)
       @native.call(context.to_n)
