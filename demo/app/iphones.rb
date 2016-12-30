@@ -12,12 +12,20 @@ x = D3.scale_linear.domain(IPhoneVariants.map(&:released).minmax).range([20,widt
 y = D3.scale_log.domain(IPhoneVariants.map(&:size).minmax).range([380,20])
 c = D3.scale_ordinal.range(D3.scheme_category_10)
 
+# If there are multiple points on same date/size combination,
+# move any duplicates 15px right (or 30px for triplicates etc.)
+duplicates = Hash.new(0)
+
 graph_area = svg.append("g")
     .attr("transform", "translate(60, 20)")
 graph_area.select_all("circle")
   .data(IPhoneVariants).enter
   .append("circle")
-    .attr("cx"){|d| x.(d.released)}
+    .attr("cx"){|d|
+      count = duplicates[[d.released, d.size]]
+      duplicates[[d.released, d.size]] += 1
+      x.(d.released) + 15 * count
+    }
     .attr("cy"){|d| y.(d.size)}
     .attr("r", 10)
     .attr("fill"){|d| c.(d.name)}
