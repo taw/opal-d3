@@ -32,7 +32,11 @@ graph_area.append("path")
     .attr("d", inner_area.(LondonPopulation))
     .attr("fill", "steelblue")
 
-axis_bottom = D3.axis_bottom(x)
-axis_left = D3.axis_left(y)
+axis_bottom = D3.axis_bottom(x).tick_format(D3.format("d"))
+axis_left = D3.axis_left(y).tick_format{|d| "#{d/1_000_000}M"}
 graph_area.call(axis_left)
 graph_area.append("g").attr("transform", "translate(0, 400)").call(axis_bottom)
+
+list = D3.select("#visualization").append("table")
+list.append("tr").append("td").text("Outer London").style("background", "pink")
+list.append("tr").append("td").text("Inner London").style("background", "steelblue")

@@ -40,3 +40,7 @@ svg.append("g").select_all("circle")
     .attr("cx"){|d| 15 + (d.year-1800)*4 }
     .attr("cy", 300)
     .attr("r"){|d| (d.inner**0.5)/150.0 }
+
+list = D3.select("#visualization").append("table")
+list.append("tr").append("td").text("Outer London").style("background", "pink")
+list.append("tr").append("td").text("Inner London").style("background", "steelblue")
