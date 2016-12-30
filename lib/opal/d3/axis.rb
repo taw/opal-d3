@@ -1,28 +1,63 @@
 module D3
+  # It might be better to rewrap the Scale every time, as we're duplicating it
   class Axis
     include D3::Native
-    attribute_d3 :scale
+
+    def initialize(native, scale_obj)
+      raise unless native
+      raise unless scale_obj
+      @scale_obj = scale_obj
+      @native = native
+    end
+
     attribute_d3 :tick_size_inner, :tickSizeInner
     attribute_d3 :tick_size_outer, :tickSizeOuter
     attribute_d3 :tick_size, :tickSize
     attribute_d3 :tick_padding, :tickPadding
+
+    def call(context)
+      @native.call(context.to_n)
+      self
+    end
+
+    def scale(v=`undefined`)
+      if `v === undefined`
+        @scale_obj
+      else
+        @scale_obj = v
+        @native.JS.scale(v.to_n)
+        self
+      end
+    end
+    alias_method :scale=, :scale
+
+    def tick_values(v=`undefined`)
+      if `v === undefined`
+        result = @native.JS.tickValues
+        `result === null ? nil : result`
+      else
+        @native.JS.tickValues(v == nil ? `null` : v)
+        self
+      end
+    end
+    alias_method :tick_values=, :tick_values
   end
 
   class << self
     def axis_top(scale)
-      D3::Axis.new @d3.JS.axisTop(scale)
+      D3::Axis.new(@d3.JS.axisTop(scale.to_n), scale)
     end
 
     def axis_bottom(scale)
-      D3::Axis.new @d3.JS.axisBottom(scale)
+      D3::Axis.new(@d3.JS.axisBottom(scale.to_n), scale)
     end
 
     def axis_right(scale)
-      D3::Axis.new @d3.JS.axisRight(scale)
+      D3::Axis.new(@d3.JS.axisRight(scale.to_n), scale)
     end
 
     def axis_left(scale)
-      D3::Axis.new @d3.JS.axisLeft(scale)
+      D3::Axis.new(@d3.JS.axisLeft(scale.to_n), scale)
     end
   end
 end

@@ -75,7 +75,7 @@ describe "d3 - continuous scale" do
     end
 
     it "color piecewise" do
-      color = D3.scale_linear().domain([-1, 0, 1]).range(["red", "white", "green"])
+      color = D3.scale_linear.domain([-1, 0, 1]).range(["red", "white", "green"])
       expect(color.(-1)).to eq("rgb(255, 0, 0)")
       expect(color.(-0.5)).to eq("rgb(255, 128, 128)")
       expect(color.(0)).to eq("rgb(255, 255, 255)")
@@ -84,7 +84,7 @@ describe "d3 - continuous scale" do
     end
 
     it ".ticks / .tick_format" do
-      x = D3.scale_linear().domain([-1, 1]).range([0, 960])
+      x = D3.scale_linear.domain([-1, 1]).range([0, 960])
       expect(x.ticks(5)).to eq([-1, -0.5, 0, 0.5, 1])
       expect(x.ticks.map{|v| v.round(2)}).to eq([-1, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1])
       tick_format = x.tick_format(5, "+%")
