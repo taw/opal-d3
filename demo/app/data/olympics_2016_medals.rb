@@ -1,3 +1,5 @@
+require "ostruct"
+
 Olympics2016Medals = [
   ["United States", "USA", 46, 37, 38],
   ["Great Britain", "GBR", 27, 23, 17],
@@ -86,4 +88,13 @@ Olympics2016Medals = [
   ["Portugal", "POR", 0, 0, 1],
   ["Trinidad and Tobago", "TTO", 0, 0, 1],
   ["United Arab Emirates", "UAE", 0, 0, 1],
-]
+].map{|n,a,g,s,b|
+  OpenStruct.new(
+    name: n,
+    acronym: a,
+    gold: g,
+    silver: s,
+    bronze: b,
+    total: g+s+b,
+  )
+}
