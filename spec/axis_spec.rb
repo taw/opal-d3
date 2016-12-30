@@ -149,4 +149,26 @@ describe "d3 - axis" do
       '</svg>',
     ].join)
   end
+
+  it "axis.tick_arguments" do
+    context = D3.select("#test-area").append("svg")
+    expect(axis.tick_arguments).to eq([])
+    axis.tick_arguments([10, ".2f"])
+    expect(axis.tick_arguments).to eq([10, ".2f"])
+    axis.(context)
+    expect(D3.select("#test-area").html).to eq([
+      '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
+      '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
+      '<g class="tick" opacity="1" transform="translate(0,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">0.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(100,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">10000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(200,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">20000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(300,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">30000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(400,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">40000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(500,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">50000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(600,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">60000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(700,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">70000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(800,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">80000000.00</text></g>',
+      '</svg>',
+    ].join)
+  end
 end
