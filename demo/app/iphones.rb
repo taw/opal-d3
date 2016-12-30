@@ -10,7 +10,7 @@ width = svg.style("width").to_i
 
 x = D3.scale_linear.domain(IPhoneVariants.map(&:released).minmax).range([20,width-90]).nice
 y = D3.scale_log.domain(IPhoneVariants.map(&:size).minmax).range([380,20])
-c = D3.scale_ordinal.range(D3.scheme_category_10)
+c = D3.scale_ordinal.range(D3.scheme_category_20)
 
 # If there are multiple points on same date/size combination,
 # move any duplicates 15px right (or 30px for triplicates etc.)
