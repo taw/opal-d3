@@ -1,3 +1,5 @@
+require "ostruct"
+
 LondonPopulation = [
   {"year": 1801, "inner": 879491, "outer": 131666, "greater": 1011157 },
   {"year": 1811, "inner": 1040033, "outer": 157640, "greater": 1197673 },
@@ -21,4 +23,4 @@ LondonPopulation = [
   {"year": 1991, "inner": 2625245, "outer": 4262035, "greater": 6887280 },
   {"year": 2001, "inner": 2765975, "outer": 4406061, "greater": 7172036 },
   {"year": 2011, "inner": 3231900, "outer": 4942100, "greater": 8173900 },
-]
+].map{|o| OpenStruct.new(o)}

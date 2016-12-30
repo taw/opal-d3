@@ -6,22 +6,21 @@ svg = D3.select("#visualization")
         .append("svg")
         .attr("height", "500px")
         .attr("width", "100%")
-
 width = svg.style("width").to_i
 
 x = D3.scale_linear.domain([1801, 2011]).range([0, width-60])
 y = D3.scale_linear.domain([0, 9_000_000]).range([400, 0])
 
 greater_area = D3.area
-            .x{|d| x.(d[:year]) }
+            .x{|d| x.(d.year) }
             .y0(400)
-            .y1{|d| y.(d[:greater])}
+            .y1{|d| y.(d.greater)}
             .curve(D3.curve_natural)
 
 inner_area = D3.area
-            .x{|d| x.(d[:year]) }
+            .x{|d| x.(d.year) }
             .y0(400)
-            .y1{|d| y.(d[:inner])}
+            .y1{|d| y.(d.inner)}
             .curve(D3.curve_natural)
 
 graph_area = svg.append("g")
