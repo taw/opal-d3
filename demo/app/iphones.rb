@@ -29,3 +29,11 @@ axis_left = D3.axis_left(y)
   .tick_format{|v| "#{v} GB"}
 graph_area.call(axis_left)
 graph_area.append("g").attr("transform", "translate(0, 400)").call(axis_bottom)
+
+D3.select("#visualization").append("table")
+  .select_all("tr")
+  .data(IPhones).enter
+  .append("tr")
+    .append("td")
+    .text{|d| d.name}
+    .style("background"){|d| c.(d.name)}
