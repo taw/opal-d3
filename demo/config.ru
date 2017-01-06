@@ -16,6 +16,8 @@ visualizations = {
 	london_population_area: "London Population - Area Chart",
 	olympics_2016_medals: "Olympics 2016 Medals",
   iphones: "iPhones",
+  polish_pms: "Polish Prime Ministers",
+  man_vs_horse: "Man versus Horse Marathon",
 }
 
 visualizations.each do |script, title|
