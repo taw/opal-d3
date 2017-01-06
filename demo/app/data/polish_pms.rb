@@ -1,4 +1,5 @@
 require "ostruct"
+require "time"
 
 PolishPMs = [
   ["Tadeusz Mazowiecki",      "UD",  "1989-08-24", "1991-01-04"],
@@ -21,7 +22,7 @@ PolishPMs = [
   OpenStruct.new(
     name: n,
     party: p,
-    start: Date.parse(s),
-    end: Date.parse(e),
+    start: Time.parse(s),
+    end: Time.parse(e),
   )
 }
