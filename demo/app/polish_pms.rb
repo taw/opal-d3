@@ -11,7 +11,7 @@ width = svg.style("width").to_i
 min_date = PolishPMs.map(&:start).min
 max_date = PolishPMs.map(&:end).max
 
-x = D3.scale_linear.domain([min_date, max_date]).range([100,width-90]).nice
+x = D3.scale_linear.domain([min_date, max_date]).range([100,width-90])
 y = D3.scale_linear.domain([0, PolishPMs.size+1]).range([0, 580])
 c = D3.scale_ordinal.range(D3.scheme_category_20)
 
@@ -50,4 +50,4 @@ graph_area.append("g")
 
 axis_bottom = D3.axis_bottom(x)
   .tick_format(D3.time_format("%B %Y"))
-graph_area.append("g").attr("transform", "translate(0, 600)").call(axis_bottom)
+graph_area.append("g").attr("transform", "translate(0, 560)").call(axis_bottom)
