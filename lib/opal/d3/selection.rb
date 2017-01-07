@@ -67,6 +67,15 @@ module D3
       self
     end
 
+    def property(key, value=`undefined`)
+      if `value === undefined`
+        @native.JS.property(key)
+      else
+        @native.JS.property(key, value)
+        self
+      end
+    end
+
     # Usage:
     # style("foo")
     # style("foo"){ value }

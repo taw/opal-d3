@@ -59,4 +59,29 @@ describe "d3 - selection - DOM manipulation" do
     expect(p.attr("class")).to eq("big")
     expect(p.style("color")).to eq("rgb(255, 0, 0)")
   end
+
+  it "selection.style priority" do
+    d = D3.select_all("div")
+    d.append("p").style("color", "red", "important")
+    expect(d.html).to eq(%Q[<p style="color: red !important;"></p>])
+  end
+
+  it "selection.property" do
+    d = D3.select_all("div")
+    d.html("<input type=radio name=a class=x><input type=radio name=a class=y>")
+    expect(D3.select(".x").property("checked")).to eq(false)
+    expect(D3.select(".y").property("checked")).to eq(false)
+
+    D3.select(".x").property("checked", true)
+    expect(D3.select(".x").property("checked")).to eq(true)
+    expect(D3.select(".y").property("checked")).to eq(false)
+
+    D3.select(".y").property("checked", true)
+    expect(D3.select(".x").property("checked")).to eq(false)
+    expect(D3.select(".y").property("checked")).to eq(true)
+
+    expect(d.html).to eq(
+      %Q[<input type="radio" name="a" class="x"><input type="radio" name="a" class="y">]
+    )
+  end
 end
