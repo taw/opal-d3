@@ -32,6 +32,27 @@ module D3
     alias_native_new :exit
     alias_native :call
 
+    def merge(other)
+      D3::Selection.new @native.JS.merge(other.to_n)
+    end
+
+    def filter(other=`undefined`,&block)
+      if block_given?
+        D3::Selection.new @native.JS.filter(block)
+      else
+        D3::Selection.new @native.JS.filter(other)
+      end
+    end
+
+    def each(other=`undefined`,&block)
+      if block_given?
+        @native.JS.each(block)
+      else
+        @native.JS.each(other)
+      end
+      self
+    end
+
     # Usage:
     # style("foo")
     # style("foo"){ value }

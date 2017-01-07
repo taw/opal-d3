@@ -33,6 +33,94 @@ describe "d3 - selection" do
     expect(s.empty?).to eq(true)
   end
 
+  describe "nested selections" do
+    before(:each) do
+      D3.select("div").html("
+        <p><b>1</b><b>2</b><b>3</b></p>
+        <p><b>4</b><b>5</b><b>6</b></p>
+      ")
+    end
+
+    it "selection.select" do
+      expect(D3.select("p").select("b").size).to eq(1)
+      expect(D3.select_all("p").select("b").size).to eq(2)
+    end
+
+    it "selection.select_all" do
+      expect(D3.select("p").select_all("b").size).to eq(3)
+      expect(D3.select_all("p").select_all("b").size).to eq(6)
+    end
+  end
+
+  describe "selection.filter - selector string" do
+    before(:each) do
+      D3.select("div").html("
+        <span class='a b'>1</span>
+        <span class='b c'>2</span>
+        <span class='c d'>3</span>
+      ")
+    end
+    let(:a) { D3.select_all("span.a") }
+    let(:b) { D3.select_all("span.b") }
+    let(:c) { D3.select_all("span.c") }
+    let(:d) { D3.select_all("span.d") }
+
+    it do
+      expect(b.filter(".c").size).to eq(1)
+    end
+  end
+
+  describe "selection.filter - filter" do
+    before(:each) do
+      D3.select("div")
+        .select_all("span")
+        .data(%W[a b c d])
+        .enter
+        .append("span")
+        .text{|d| d}
+    end
+
+    it "function" do
+      D3.select_all("span").filter{|d| d =~ /[bc]/}.attr("class", "x")
+      expect(D3.select("div").html).to eq(
+        %Q[<span class="x">a</span><span>b</span><span>c</span><span class="x">d</span>]
+      )
+    end
+
+    it "function with index" do
+      D3.select_all("span").filter{|d,i| i.even?}.attr("class", "y")
+      expect(D3.select("div").html).to eq(
+        %Q[<span class="y">a</span><span>b</span><span class="y">c</span><span>d</span>]
+      )
+    end
+  end
+
+  describe "selection.each" do
+    before(:each) do
+      D3.select("div")
+        .select_all("span")
+        .data(%W[a b c d])
+        .enter
+        .append("span")
+        .text{|d| d}
+    end
+    it do
+      results = []
+      D3.select_all("span").each do |n|
+        results << n
+      end
+      expect(results).to eq(["a", "b", "c", "d"])
+    end
+
+    it do
+      results = []
+      D3.select_all("span").each do |n,i|
+        results << [n,i]
+      end
+      expect(results).to eq([["a", 0], ["b", 1], ["c", 2], ["d", 3]])
+    end
+  end
+
   it "selection.append" do
     div = D3.select_all("div")
     ul = div.append("ul")
@@ -69,61 +157,6 @@ describe "d3 - selection" do
     p = d.select_all("p")
     expect(p.attr("class")).to eq("big")
     expect(p.style("color")).to eq("rgb(255, 0, 0)")
-  end
-
-  describe "data" do
-    let(:data) {[
-      {name: "A", value: 10},
-      {name: "B", value: 20},
-      {name: "C", value: 30},
-    ]}
-    let(:root) { D3.select("div") }
-    let(:html) { root.html }
-    it "enter" do
-      root
-        .append("ul")
-        .select_all("li")
-        .data(data)
-        .enter
-        .append("li")
-        .html{|d| "<b>#{d[:name]}</b>"}
-        .style("font-size"){|d| "#{d[:value]}px"}
-      expect(html).to eq([
-        %Q[<ul>],
-        %Q[<li style="font-size: 10px;"><b>A</b></li>],
-        %Q[<li style="font-size: 20px;"><b>B</b></li>],
-        %Q[<li style="font-size: 30px;"><b>C</b></li>],
-        %Q[</ul>],
-      ].join)
-    end
-
-    it "matrix" do
-      matrix = [
-        [11975,  5871, 8916, 2868],
-        [ 1951, 10048, 2060, 6171],
-        [ 8010, 16145, 8090, 8045],
-        [ 1013,   990,  940, 6907],
-      ]
-      tr = root
-        .append("table")
-        .select_all("tr")
-        .data(matrix)
-        .enter
-        .append("tr")
-      td = tr.select_all("td")
-        .data{|d| d}
-        .enter
-        .append("td")
-        .text{|d| d}
-      expect(html).to eq([
-        %Q[<table>],
-        %Q[<tr><td>11975</td><td>5871</td><td>8916</td><td>2868</td></tr>],
-        %Q[<tr><td>1951</td><td>10048</td><td>2060</td><td>6171</td></tr>],
-        %Q[<tr><td>8010</td><td>16145</td><td>8090</td><td>8045</td></tr>],
-        %Q[<tr><td>1013</td><td>990</td><td>940</td><td>6907</td></tr>],
-        %Q[</table>],
-      ].join)
-    end
   end
 
   it "svg" do
