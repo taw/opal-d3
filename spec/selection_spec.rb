@@ -162,4 +162,26 @@ describe "d3 - selection" do
     expect(D3.select("div").html).to eq(
       %Q[<svg width="960" height="500"><g transform="translate(20,20)"><rect width="920" height="460"></rect></g></svg>])
   end
+
+  describe do
+    before(:each) do
+      D3.select("div").html("
+        <p><b>1</b><b>2</b><b>3</b></p>
+        <p><b>4</b><b>5</b><b>6</b></p>
+      ")
+    end
+
+    # These should use opal-browser, but that seems to be broken with phantomjs
+    # For now just expose raw js objects
+    it "selection.node" do
+      expect(D3.select_all("b").node).to be_instance_of(Native::Object)
+    end
+
+    it "selection.nodes" do
+      expect(D3.select_all("b").nodes).to be_instance_of(Array)
+      D3.select_all("b").nodes.each do |n|
+        expect(n).to be_instance_of(Native::Object)
+      end
+    end
+  end
 end
