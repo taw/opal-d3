@@ -47,6 +47,7 @@ module D3
       end
     end
 
+    alias_native_new :remove
     alias_native_new :select
     alias_native_new :select_all, :selectAll
     alias_native_new :enter

@@ -129,5 +129,29 @@ describe "d3 - selection - DOM manipulation" do
         %Q[<span class="a"></span><span class="b"></span><i></i><span class="c"></span><span class="d"></span><span class="e"></span>]
       )
     end
+
+    it "selection.insert before dom element" do
+      D3.select_all("div").insert("i"){ `document.getElementsByClassName("d")[0]` }
+      expect(html).to eq(
+        %Q[<span class="a"></span><span class="b"></span><span class="c"></span><i></i><span class="d"></span><span class="e"></span>]
+      )
+    end
+
+    it "selection.insert before - two functions" do
+      D3.select_all("div").insert(
+        proc{`document.createElement("b")`},
+        proc{`document.getElementsByClassName("d")[0]`}
+      )
+      expect(html).to eq(
+        %Q[<span class="a"></span><span class="b"></span><span class="c"></span><b></b><span class="d"></span><span class="e"></span>]
+      )
+    end
+
+    it "selection.remove" do
+      D3.select(".c").remove
+      expect(html).to eq(
+        %Q[<span class="a"></span><span class="b"></span><span class="d"></span><span class="e"></span>]
+      )
+    end
   end
 end
