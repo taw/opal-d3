@@ -153,5 +153,14 @@ describe "d3 - selection - DOM manipulation" do
         %Q[<span class="a"></span><span class="b"></span><span class="d"></span><span class="e"></span>]
       )
     end
+
+    # This interface is somewhat awkward
+    it "selection.remove and add back" do
+      sel = D3.select(".c").remove
+      D3.select(".b").append{ sel.node.to_n }
+      expect(html).to eq(
+        %Q[<span class="a"></span><span class="b"><span class="c"></span></span><span class="d"></span><span class="e"></span>]
+      )
+    end
   end
 end
