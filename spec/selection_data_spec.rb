@@ -2,7 +2,7 @@ describe "d3 - selection - data" do
   after(:each) do
     D3.select("#test-area").html("")
   end
-  let(:root) { D3.select("div") }
+  let(:root) { D3.select("#test-area") }
   let(:html) { root.html }
 
   describe "list" do

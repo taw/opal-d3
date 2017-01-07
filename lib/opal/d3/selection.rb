@@ -25,7 +25,28 @@ module D3
       end
     end
 
-    alias_native_new :append
+    def append(name=`undefined`, &block)
+      raise if `name !== undefined` and block_given?
+      name = block if block_given?
+      D3::Selection.new @native.JS.append(name)
+    end
+
+    def insert(name=`undefined`, before=`undefined`, &block)
+      if `name === undefined`
+        raise unless block_given?
+        D3::Selection.new @native.JS.insert(block)
+      elsif `before === undefined`
+        if block_given?
+          D3::Selection.new @native.JS.insert(name, block)
+        else
+          D3::Selection.new @native.JS.insert(name, before)
+        end
+      else
+        raise if block_given?
+        D3::Selection.new @native.JS.insert(name, before)
+      end
+    end
+
     alias_native_new :select
     alias_native_new :select_all, :selectAll
     alias_native_new :enter

@@ -2,7 +2,7 @@ describe "d3 - selection - DOM manipulation" do
   after(:each) do
     D3.select("#test-area").html("")
   end
-  let(:root) { D3.select("div") }
+  let(:root) { D3.select("#test-area") }
   let(:html) { root.html }
 
   describe do
@@ -83,5 +83,51 @@ describe "d3 - selection - DOM manipulation" do
     expect(d.html).to eq(
       %Q[<input type="radio" name="a" class="x"><input type="radio" name="a" class="y">]
     )
+  end
+
+  describe do
+    before(:each) do
+      D3.select("div")
+        .select_all("span")
+        .data(%W[a b c d e])
+        .enter
+        .append("span")
+        .attr("class"){|d| d}
+    end
+
+    it "selection.append name" do
+      D3.select_all("div").append("i")
+      expect(html).to eq(
+        %Q[<span class="a"></span><span class="b"></span><span class="c"></span><span class="d"></span><span class="e"></span><i></i>]
+      )
+    end
+
+    it "selection.append dom element" do
+      D3.select_all("div").append{ `document.createElement("b")` }
+      expect(html).to eq(
+        %Q[<span class="a"></span><span class="b"></span><span class="c"></span><span class="d"></span><span class="e"></span><b></b>]
+      )
+    end
+
+    it "selection.insert name" do
+      D3.select_all("div").insert("i")
+      expect(html).to eq(
+        %Q[<span class="a"></span><span class="b"></span><span class="c"></span><span class="d"></span><span class="e"></span><i></i>]
+      )
+    end
+
+    it "selection.insert dom element" do
+      D3.select_all("div").insert{ `document.createElement("b")` }
+      expect(html).to eq(
+        %Q[<span class="a"></span><span class="b"></span><span class="c"></span><span class="d"></span><span class="e"></span><b></b>]
+      )
+    end
+
+    it "selection.insert before" do
+      D3.select_all("div").insert("i", ".c")
+      expect(html).to eq(
+        %Q[<span class="a"></span><span class="b"></span><i></i><span class="c"></span><span class="d"></span><span class="e"></span>]
+      )
+    end
   end
 end
