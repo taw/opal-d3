@@ -14,15 +14,39 @@ describe "d3 - selection - DOM manipulation" do
         .append("span")
         .attr("class"){|d| d}
     end
+    let(:classes) {
+      html.scan(/<span.*?<\/span>/).map{|x| x[/class="([^"]*)"/, 1] || "" }
+    }
 
     it "selection.raise" do
       D3.select(".c").raise
-      expect(html.scan(/class="(.)"/)).to eq([["a"], ["b"], ["d"], ["e"], ["c"]])
+      expect(classes).to eq(["a", "b", "d", "e", "c"])
     end
 
     it "selection.lower" do
       D3.select(".c").lower
-      expect(html.scan(/class="(.)"/)).to eq([["c"], ["a"], ["b"], ["d"], ["e"]])
+      expect(classes).to eq(["c", "a", "b", "d", "e"])
+    end
+
+    it "selection.classed - add" do
+      D3.select_all("span").classed("a b", true)
+      expect(classes).to eq(["a b", "b a", "c a b", "d a b", "e a b"])
+    end
+
+    it "selection.classed - remove" do
+      D3.select_all("span").classed("a b", false)
+      expect(classes).to eq(["", "", "c", "d", "e"])
+    end
+
+    it "selection.classed - function" do
+      D3.select_all("span").classed("x"){|d,i| i.even?}
+      expect(classes).to eq(["a x", "b", "c x", "d", "e x"])
+    end
+
+    it "selection.classed - query" do
+      expect(D3.select(".c").classed("a")).to eq(false)
+      expect(D3.select(".c").classed("c")).to eq(true)
+      expect(D3.select(".c").classed("b c")).to eq(false)
     end
   end
 

@@ -38,6 +38,18 @@ module D3
       D3::Selection.new @native.JS.merge(other.to_n)
     end
 
+    def classed(classes, yesno=`undefined`, &block)
+      if block_given?
+        @native.JS.classed(classes, block)
+        self
+      elsif `yesno !== undefined`
+        @native.JS.classed(classes, yesno)
+        self
+      else
+        @native.JS.classed(classes)
+      end
+    end
+
     def filter(other=`undefined`,&block)
       if block_given?
         D3::Selection.new @native.JS.filter(block)
