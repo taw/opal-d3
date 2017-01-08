@@ -7,8 +7,8 @@ row = D3.select("#visualization").append("div").attr("class", "row")
 min_temp = WeatherInLondon.map(&:min).min
 max_temp = WeatherInLondon.map(&:max).max
 
-x = D3.scale_linear.domain([1,31]).range([10, 190])
-y = D3.scale_linear.domain([min_temp, max_temp]).range([190, 10])
+x = D3.scale_linear.domain([1,31]).range([30, 190])
+y = D3.scale_linear.domain([min_temp, max_temp]).range([180, 20])
 
 (1..12).each do |month|
   header = D3.time_format("%B").(Time.parse("2016-#{month}-01"))
@@ -19,11 +19,11 @@ y = D3.scale_linear.domain([min_temp, max_temp]).range([190, 10])
     .attr("width", "200px")
 
   svg.append("rect")
-    .attr("x", 10)
+    .attr("x", 20)
     .attr("y", 10)
     .attr("width", 180)
     .attr("height", 180)
-    .attr("fill", "grey")
+    .attr("fill", "lightgrey")
 
   data = WeatherInLondon.select{|row| row.month == month}
 
@@ -56,4 +56,7 @@ y = D3.scale_linear.domain([min_temp, max_temp]).range([190, 10])
       .attr("stroke", "blue")
       .attr("stroke-width", "2px")
       .attr("fill", "none")
+
+  axis_left = D3.axis_left(y).tick_size(2)
+  svg.append("g").attr("transform", "translate(20,0)").call(axis_left)
 end
