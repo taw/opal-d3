@@ -1,4 +1,5 @@
 require "ostruct"
+require "time"
 
 ParadoxGames = [
   ["Crusader Kings",     1, "",                     "2004-08-27"],
@@ -6,8 +7,8 @@ ParadoxGames = [
   ["Crusader Kings",     2, "",                     "2012-02-14"],
   ["Crusader Kings",     2, "Sword of Islam",       "2012-06-26"],
   ["Crusader Kings",     2, "Legacy of Rome",       "2012-10-16"],
-  ["Crusader Kings",     2, "The Republic",         "2012-01-12"],
   ["Crusader Kings",     2, "Sunset Invasion",      "2012-11-15"],
+  ["Crusader Kings",     2, "The Republic",         "2013-01-12"],
   ["Crusader Kings",     2, "The Old Gods",         "2013-05-28"],
   ["Crusader Kings",     2, "Sons of Abraham",      "2013-11-18"],
   ["Crusader Kings",     2, "Charlemagne",          "2014-10-14"],
@@ -51,9 +52,9 @@ ParadoxGames = [
   ["Victoria",           2, "Heart of Darkness",    "2013-04-16"],
 ].map do |s,n,d,t|
   OpenStruct.new(
-    series: n,
-    nuber: n,
+    series: s,
+    number: n,
     dlc: d,
-    t: Time.parse(t),
+    time: Time.parse(t),
   )
 end

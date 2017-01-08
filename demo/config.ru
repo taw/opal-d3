@@ -18,6 +18,7 @@ visualizations = {
   iphones: "iPhones",
   polish_pms: "Polish Prime Ministers",
   man_vs_horse: "Man versus Horse Marathon",
+  paradox: "Paradox Interactive Games",
 }
 
 visualizations.each do |script, title|
