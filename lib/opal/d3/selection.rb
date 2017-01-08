@@ -28,22 +28,22 @@ module D3
     def append(name=`undefined`, &block)
       raise if `name !== undefined` and block_given?
       name = block if block_given?
-      D3::Selection.new @native.JS.append(name)
+      D3::Selection.new @native.JS.append(name.to_n)
     end
 
     def insert(name=`undefined`, before=`undefined`, &block)
       if `name === undefined`
         raise unless block_given?
-        D3::Selection.new @native.JS.insert(block)
+        D3::Selection.new @native.JS.insert(block.to_n)
       elsif `before === undefined`
         if block_given?
-          D3::Selection.new @native.JS.insert(name, block)
+          D3::Selection.new @native.JS.insert(name.to_n, block.to_n)
         else
-          D3::Selection.new @native.JS.insert(name, before)
+          D3::Selection.new @native.JS.insert(name.to_n)
         end
       else
         raise if block_given?
-        D3::Selection.new @native.JS.insert(name, before)
+        D3::Selection.new @native.JS.insert(name.to_n, before.to_n)
       end
     end
 
