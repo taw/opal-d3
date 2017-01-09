@@ -21,13 +21,16 @@ module D3
         eval <<-EOF
           def #{ruby_name}(new_value=`undefined`)
             if `new_value !== undefined`
+              new_value = `null` if new_value == nil
               @native.JS.#{js_name}(new_value)
               self
             else
-              @native.JS.#{js_name}
+              value = @native.JS.#{js_name}
+              `value === null ? nil : value`
             end
           end
           def #{ruby_name}=(new_value)
+            new_value = `null` if new_value == nil
             @native.JS.#{js_name}(new_value)
           end
         EOF
@@ -45,13 +48,16 @@ module D3
               @native.JS.#{js_name}(block)
               self
             elsif `new_value !== undefined`
+              new_value = `null` if new_value == nil
               @native.JS.#{js_name}(new_value)
               self
             else
-              @native.JS.#{js_name}
+              value = @native.JS.#{js_name}
+              `value === null ? nil : value`
             end
           end
           def #{ruby_name}=(new_value)
+            new_value = `null` if new_value == nil
             @native.JS.#{js_name}(new_value)
           end
         EOF
