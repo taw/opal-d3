@@ -22,6 +22,7 @@ visualizations = {
   weather_in_london: "Weather in London",
   harry_potter: "Harry Potter Books",
   mtg_modern_creatures: "MTG: Creatures in Modern",
+  star_trek_voyager: "Star Trek: Voyager",
 }
 
 visualizations.each do |script, title|

@@ -172,11 +172,12 @@ StarTrekVoyager = [
   [7, 23, "Homestead", 7.5],
   [7, 24, "Renaissance Man", 7.6],
   [7, 25, "Endgame", 8.5],
-].map do |s,e,t,r|
+].each_with_index.map do |(s,e,t,r),i|
   OpenStruct.new(
     season: s,
     episode: e,
     title: t,
     rating: r,
+    number: i
   )
 end
