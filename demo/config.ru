@@ -21,6 +21,7 @@ visualizations = {
   paradox: "Paradox Interactive Games",
   weather_in_london: "Weather in London",
   harry_potter: "Harry Potter Books",
+  mtg_modern_creatures: "MTG: Creatures in Modern",
 }
 
 visualizations.each do |script, title|
