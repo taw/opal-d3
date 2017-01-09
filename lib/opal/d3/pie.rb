@@ -10,6 +10,9 @@ module D3
     attribute_d3_block :start_angle, :startAngle
     attribute_d3_block :end_angle, :endAngle
     attribute_d3_block :pad_angle, :padAngle
+    attribute_d3_block :value
+    attribute_d3_block :sort
+    attribute_d3_block :sort_values, :sortValues
   end
 
   class << self

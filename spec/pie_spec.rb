@@ -20,7 +20,7 @@ describe "d3 - pie" do
     end
   end
 
-  describe "start_angle" do
+  describe "pie.start_angle" do
     it do
       expect(pie.start_angle.()).to eq(0)
       pie.start_angle(2)
@@ -33,7 +33,7 @@ describe "d3 - pie" do
     end
   end
 
-  describe "end_angle" do
+  describe "pie.end_angle" do
     it do
       expect(pie.end_angle.()).to eq(2*Math::PI)
       pie.end_angle(4)
@@ -46,7 +46,7 @@ describe "d3 - pie" do
     end
   end
 
-  describe "pad_angle" do
+  describe "pie.pad_angle" do
     it do
       expect(pie.pad_angle.()).to eq(0)
       pie.pad_angle(0.1)
@@ -55,6 +55,59 @@ describe "d3 - pie" do
         {data: 1, index: 2, value: 1, start_angle: 5.44, end_angle: 6.28, pad_angle: 0.1},
         {data: 3, index: 1, value: 3, start_angle: 3.09, end_angle: 5.44, pad_angle: 0.1},
         {data: 4, index: 0, value: 4, start_angle: 0.00, end_angle: 3.09, pad_angle: 0.1},
+      ])
+    end
+  end
+
+  describe "accessors" do
+    let(:data) {[
+      ["a", 10],
+      ["b", 5],
+      ["d", 15],
+      ["c", 20],
+    ]}
+    let(:pie) { D3.pie.value{|d| d[1]} }
+    let(:order) {
+      generated
+        .sort_by{|arc| arc[:index] }
+        .map{|arc| arc.select{|k,v| k =~ /data|value/ }}
+    }
+    it "pie.value" do
+      expect(order).to eq([
+        {"data"=>["c", 20], "value"=>20},
+        {"data"=>["d", 15], "value"=>15},
+        {"data"=>["a", 10], "value"=>10},
+        {"data"=>["b",  5], "value"=> 5},
+      ])
+    end
+
+    it "pie.sort" do
+      pie.sort{|a,b| a <=> b}
+      expect(order).to eq([
+        {"data"=>["a", 10], "value"=>10},
+        {"data"=>["b",  5], "value"=> 5},
+        {"data"=>["c", 20], "value"=>20},
+        {"data"=>["d", 15], "value"=>15},
+      ])
+    end
+
+    it "pie.sort - nil" do
+      pie.sort(nil)
+      expect(order).to eq([
+        {"data"=>["a", 10], "value"=>10},
+        {"data"=>["b",  5], "value"=> 5},
+        {"data"=>["d", 15], "value"=>15},
+        {"data"=>["c", 20], "value"=>20},
+      ])
+    end
+
+    it "pie.sort_values" do
+      pie.sort_values{|a,b| a <=> b}
+      expect(order).to eq([
+        {"data"=>["b",  5], "value"=> 5},
+        {"data"=>["a", 10], "value"=>10},
+        {"data"=>["d", 15], "value"=>15},
+        {"data"=>["c", 20], "value"=>20},
       ])
     end
   end
