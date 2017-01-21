@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>MTG: Spell Cards in Modern</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="assets/style.css">
   <link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css' rel='stylesheet'/>
   <script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js'></script>
   <script>hljs.initHighlightingOnLoad();</script>
@@ -66,8 +66,8 @@ MtgModernColors.group_by(&:cmc).sort.each do |cmc, cards|
 end
 </code></pre>
     </div>
-    <script src="/assets/d3.js"></script>
-    <script src="/assets/mtg_modern_colors.js"></script>
+    <script src="../assets/d3.js"></script>
+    <script src="../assets/mtg_modern_colors.js"></script>
     <script>
       window.onload = function() { Opal.load("mtg_modern_colors"); }
     </script>
