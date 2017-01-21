@@ -27,7 +27,7 @@ visualizations = {
 }
 
 visualizations.each do |script, title|
-  get "/v/#{script}" do
+  get "/v/#{script}.html" do
     erb :visualization, {}, {script: script, title: title}
   end
 end

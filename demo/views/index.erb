@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <title>Demos</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <div class="container">
     <h1>opal-d3 demos</h1>
     <ul>
       <% visualizations.each do |script, title| %>
-        <li><a href="/v/<%= script %>"><%= title %></a></li>
+        <li><a href="v/<%= script %>.html"><%= title %></a></li>
       <% end %>
     </ul>
   </div>

@@ -8,3 +8,13 @@ Opal::RSpec::RakeTask.new(:default) do |server, task|
   server.index_path = "spec/html/index.html.erb"
   server.append_path "lib"
 end
+
+desc "Create static snapshot of the demo page"
+task :snapshot do
+  dir = Pathname("snapshot")
+  system "trash", dir.to_s if dir.exist?
+  dir.mkpath
+  Dir.chdir(dir) do
+    system "wget --mirror -np http://localhost:9292/"
+  end
+end
