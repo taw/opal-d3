@@ -57,7 +57,7 @@ describe "d3 - selection - DOM manipulation" do
 
     p = d.select_all("p")
     expect(p.attr("class")).to eq("big")
-    expect(p.style("color")).to eq("rgb(255, 0, 0)")
+    expect(p.style("color")).to eq("red")
   end
 
   it "selection.style priority" do

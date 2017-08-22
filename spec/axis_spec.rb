@@ -63,15 +63,15 @@ describe "d3 - axis" do
       expect(D3.select("#test-area").html).to eq([
         '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
         '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
-        '<g class="tick" opacity="1" transform="translate(0,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">0</text></g>',
-        '<g class="tick" opacity="1" transform="translate(100,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">10,000,000</text></g>',
-        '<g class="tick" opacity="1" transform="translate(200,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">20,000,000</text></g>',
-        '<g class="tick" opacity="1" transform="translate(300,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">30,000,000</text></g>',
-        '<g class="tick" opacity="1" transform="translate(400,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">40,000,000</text></g>',
-        '<g class="tick" opacity="1" transform="translate(500,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">50,000,000</text></g>',
-        '<g class="tick" opacity="1" transform="translate(600,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">60,000,000</text></g>',
-        '<g class="tick" opacity="1" transform="translate(700,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">70,000,000</text></g>',
-        '<g class="tick" opacity="1" transform="translate(800,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">80,000,000</text></g>',
+        '<g class="tick" opacity="1" transform="translate(0.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">0</text></g>',
+        '<g class="tick" opacity="1" transform="translate(100.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">10,000,000</text></g>',
+        '<g class="tick" opacity="1" transform="translate(200.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">20,000,000</text></g>',
+        '<g class="tick" opacity="1" transform="translate(300.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">30,000,000</text></g>',
+        '<g class="tick" opacity="1" transform="translate(400.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">40,000,000</text></g>',
+        '<g class="tick" opacity="1" transform="translate(500.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">50,000,000</text></g>',
+        '<g class="tick" opacity="1" transform="translate(600.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">60,000,000</text></g>',
+        '<g class="tick" opacity="1" transform="translate(700.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">70,000,000</text></g>',
+        '<g class="tick" opacity="1" transform="translate(800.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">80,000,000</text></g>',
         '</svg>',
       ].join)
     end
@@ -84,9 +84,9 @@ describe "d3 - axis" do
       expect(D3.select("#test-area").html).to eq([
         '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
         '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
-        '<g class="tick" opacity="1" transform="translate(0,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">0</text></g>',
-        '<g class="tick" opacity="1" transform="translate(200,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">20,000,000</text></g>',
-        '<g class="tick" opacity="1" transform="translate(400,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">40,000,000</text></g>',
+        '<g class="tick" opacity="1" transform="translate(0.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">0</text></g>',
+        '<g class="tick" opacity="1" transform="translate(200.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">20,000,000</text></g>',
+        '<g class="tick" opacity="1" transform="translate(400.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">40,000,000</text></g>',
         '</svg>',
       ].join)
       axis.tick_values(nil)
@@ -105,9 +105,9 @@ describe "d3 - axis" do
       expect(D3.select("#test-area").html).to eq([
         '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
         '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
-        '<g class="tick" opacity="1" transform="translate(0,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">0.00</text></g>',
-        '<g class="tick" opacity="1" transform="translate(200,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">20,000.00</text></g>',
-        '<g class="tick" opacity="1" transform="translate(400,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">40,000.00</text></g>',
+        '<g class="tick" opacity="1" transform="translate(0.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">0.00</text></g>',
+        '<g class="tick" opacity="1" transform="translate(200.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">20,000.00</text></g>',
+        '<g class="tick" opacity="1" transform="translate(400.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">40,000.00</text></g>',
         '</svg>',
       ].join)
     end
@@ -122,9 +122,9 @@ describe "d3 - axis" do
       expect(D3.select("#test-area").html).to eq([
         '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
         '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
-        '<g class="tick" opacity="1" transform="translate(0,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">0x</text></g>',
-        '<g class="tick" opacity="1" transform="translate(200,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">20000x</text></g>',
-        '<g class="tick" opacity="1" transform="translate(400,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">40000x</text></g>',
+        '<g class="tick" opacity="1" transform="translate(0.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">0x</text></g>',
+        '<g class="tick" opacity="1" transform="translate(200.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">20000x</text></g>',
+        '<g class="tick" opacity="1" transform="translate(400.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">40000x</text></g>',
         '</svg>',
       ].join)
     end
@@ -137,15 +137,15 @@ describe "d3 - axis" do
     expect(D3.select("#test-area").html).to eq([
       '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
       '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
-      '<g class="tick" opacity="1" transform="translate(0,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">0.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(100,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">10000000.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(200,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">20000000.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(300,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">30000000.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(400,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">40000000.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(500,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">50000000.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(600,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">60000000.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(700,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">70000000.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(800,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">80000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(0.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">0.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(100.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">10000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(200.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">20000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(300.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">30000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(400.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">40000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(500.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">50000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(600.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">60000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(700.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">70000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(800.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">80000000.00</text></g>',
       '</svg>',
     ].join)
   end
@@ -159,15 +159,15 @@ describe "d3 - axis" do
     expect(D3.select("#test-area").html).to eq([
       '<svg fill="none" font-size="10" font-family="sans-serif" text-anchor="middle">',
       '<path class="domain" stroke="#000" d="M0.5,-6V0.5H800.5V-6"></path>',
-      '<g class="tick" opacity="1" transform="translate(0,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">0.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(100,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">10000000.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(200,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">20000000.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(300,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">30000000.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(400,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">40000000.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(500,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">50000000.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(600,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">60000000.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(700,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">70000000.00</text></g>',
-      '<g class="tick" opacity="1" transform="translate(800,0)"><line stroke="#000" y2="-6" x1="0.5" x2="0.5"></line><text fill="#000" y="-9" x="0.5" dy="0em">80000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(0.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">0.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(100.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">10000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(200.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">20000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(300.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">30000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(400.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">40000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(500.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">50000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(600.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">60000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(700.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">70000000.00</text></g>',
+      '<g class="tick" opacity="1" transform="translate(800.5,0)"><line stroke="#000" y2="-6"></line><text fill="#000" y="-9" dy="0em">80000000.00</text></g>',
       '</svg>',
     ].join)
   end
