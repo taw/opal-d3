@@ -16391,3 +16391,5 @@ exports.zoomIdentity = identity$8;
 Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
+;
+if (typeof(OpalLoaded) === 'undefined') OpalLoaded = []; OpalLoaded.push("d3");
