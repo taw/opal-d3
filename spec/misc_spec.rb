@@ -1,6 +1,6 @@
 describe "d3 misc methods" do
   it "d3.version" do
-    expect(D3.version).to eq("4.9.0")
+    expect(D3.version).to eq("4.9.1")
   end
 
   it "d3.namespace" do
