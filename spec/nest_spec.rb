@@ -32,19 +32,19 @@ describe "d3-collections - nests" do
 
   it "one level and rollup" do
     data = [61, 35, 24, 37, 9, 20, 42, 55, 58, 57]
-    # rollup and sorting don't seem to work together
+    # rollup and sorting got fixed in 4.10
     nest = D3.nest.key{|x| (x / 10).floor}.sort_keys(:ascending)
                   .sort_values(:descending)
                   .rollup{|*x| x.join(":")}
     expect(nest.map(data).to_h).to eq(
-      {"6"=>"61", "3"=>"35:37", "2"=>"24:20", "0"=>"9", "4"=>"42", "5"=>"55:58:57"}
+      {"6"=>"61", "3"=>"37:35", "2"=>"24:20", "0"=>"9", "4"=>"42", "5"=>"58:57:55"}
     )
     expect(nest.entries(data)).to eq([
       ["0", "9"],
       ["2", "24:20"],
-      ["3", "35:37"],
+      ["3", "37:35"],
       ["4", "42"],
-      ["5", "55:58:57"],
+      ["5", "58:57:55"],
       ["6", "61"]
     ])
   end
