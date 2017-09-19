@@ -121,3 +121,7 @@ describe "d3 - radial area" do
     end
   end
 end
+
+__END__
+
+radialArea.context - set the rendering context.

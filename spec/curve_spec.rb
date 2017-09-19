@@ -204,3 +204,11 @@ describe "d3 - curve" do
   end
 
 end
+
+__END__
+
+curve.areaStart - start a new area segment.
+curve.areaEnd - end the current area segment.
+curve.lineStart - start a new line segment.
+curve.lineEnd - end the current line segment.
+curve.point - add a point to the current line segment.

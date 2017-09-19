@@ -185,3 +185,30 @@ describe "d3 - selection" do
     end
   end
 end
+
+__END__
+
+# A lot of them have multiple interfaces, don't mark as done until sure
+
+d3.selection - select the root document element.
+d3.matcher - test whether an element matches a selector.
+d3.selector - select an element.
+d3.selectorAll - select elements.
+d3.window - get a node’s owner window.
+selection.merge - merge this selection with another.
+
+selection.on - add or remove event listeners.
+selection.dispatch - dispatch a custom event.
+d3.event - the current user event, during interaction.
+d3.customEvent - temporarily define a custom event.
+d3.mouse - get the mouse position relative to a given container.
+d3.touch - get a touch position relative to a given container.
+d3.touches - get the touch positions relative to a given container.
+
+selection.call - call a function with this selection.
+
+d3.local - declares a new local variable.
+local.set - set a local variable’s value.
+local.get - get a local variable’s value.
+local.remove - delete a local variable.
+local.toString - get the property identifier of a local variable.

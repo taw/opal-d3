@@ -78,3 +78,9 @@ describe "d3 - arc" do
     }.to_n)).to eq([30,0])
   end
 end
+
+__END__
+
+arc.padAngle - set the angle between adjacent arcs, for padded arcs.
+arc.padRadius - set the radius at which to linearize padding.
+arc.context - set the rendering context.

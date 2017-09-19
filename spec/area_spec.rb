@@ -96,3 +96,7 @@ describe "d3 - area" do
     end
   end
 end
+
+__END__
+
+area.context - set the rendering context.

@@ -62,3 +62,10 @@ describe "d3 - selection - data" do
     end
   end
 end
+
+__END__
+
+.data key
+
+selection.exit - get the exit selection (elements missing data).
+selection.datum - get or set element data (without joining).

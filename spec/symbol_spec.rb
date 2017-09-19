@@ -114,3 +114,8 @@ describe "d3 - symbol" do
     end
   end
 end
+
+__END__
+
+symbol.context - set the rendering context.
+symbolType.draw - draw this symbol to the given context.

@@ -52,3 +52,7 @@ describe "d3 - line" do
     expect(D3.line.defined{|(x,y)| x.odd?}.(extended_data)).to eq("M1,2L3,5M7,8Z")
   end
 end
+
+__END__
+
+line.context - set the rendering context.

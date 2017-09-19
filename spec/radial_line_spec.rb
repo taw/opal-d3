@@ -48,3 +48,7 @@ describe "d3 - radial line" do
     expect(radial_line.(data)).to eq("M0,-6L0,-10M0,-14L0,-16")
   end
 end
+
+__END__
+
+radialLine.context - set the rendering context.

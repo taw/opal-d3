@@ -162,5 +162,18 @@ describe "d3 - selection - DOM manipulation" do
         %Q[<span class="a"></span><span class="b"><span class="c"></span></span><span class="d"></span><span class="e"></span>]
       )
     end
+
+    it "selection.sort" do
+      # ???
+    end
+
+    it "selection.order" do
+      # ???
+    end
   end
 end
+
+__END__
+
+selection.sort - sort elements in the document based on data.
+selection.order - reorders elements in the document to match the selection.
