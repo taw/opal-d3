@@ -1,3 +1,4 @@
+# This test will fail in any non-UTC timezone
 require "time"
 
 # Running these specs in weird timezone will fail because javascript timezones are pile of fail
