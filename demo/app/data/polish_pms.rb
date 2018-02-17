@@ -17,7 +17,8 @@ PolishPMs = [
   ["Jarosław Kaczyński",      "PiS", "2006-07-14", "2007-11-16"],
   ["Donald Tusk",             "PO",  "2007-11-16", "2014-09-22"],
   ["Ewa Kopacz",              "PO",  "2014-09-22", "2015-11-16"],
-  ["Beata Szydło",            "PiS", "2015-11-16", "2017-01-06"],
+  ["Beata Szydło",            "PiS", "2015-11-16", "2017-12-11"],
+  ["Mateusz Morawiecki",      "PiS", "2017-12-11", "2018-02-17"],
 ].map{|n,p,s,e|
   OpenStruct.new(
     name: n,
