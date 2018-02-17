@@ -2,7 +2,7 @@ describe "d3 misc methods" do
   it "d3.version" do
     # opal-d3 is highly compatible with various d3 minor updates,
     # but we're only testing against one bundled here
-    expect(D3.version).to eq("4.12.2")
+    expect(D3.version).to eq("4.13.0")
   end
 
   it "d3.namespace" do
