@@ -1,3 +1,4 @@
+# Inspired by freecodecamp project
 # This visualization really stretches what opal-d3 can currently comfortably do
 # The code will hopefully become nicer in future versions of the gem
 require "opal-d3"
@@ -30,21 +31,19 @@ D3.json(url) do |error, response|
   D3.select("svg").append("g").attr("id","y-axis").call(yaxis)
 
   # This array should get automatically unpacked
-  D3.select("svg").select_all("rect").data(data).enter
+  D3.select("svg").select_all("rect")
+    .data(data).enter
     .append("rect").attr("class", "bar")
     .attr("x"){|(x,y)| xscale.(Time.parse(x)) }
     .attr("y"){|(x,y)| yscale.(y) }
     .attr("width", 2)
     .attr("height"){|(x,y)| 450 - yscale.(y) }
-    .attr("data-date"){|(x,y)| x }
-    .attr("data-gdp"){|(x,y)| y }
     .on("mouseover"){|(x,y)|
       tooltip
         .style("opacity", 0.8)
       tooltip.html("#{x} <br/> #{y}")
         .style("left", "#{`d3.event.pageX`}px")
         .style("top", "#{`d3.event.pageY` - 28}px")
-        .attr("data-date", x)
     }
     .on("mouseout"){
       # This could use .transition.duration(500), but opal-d3 doesn't support that yet
