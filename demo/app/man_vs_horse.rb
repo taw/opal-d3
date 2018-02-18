@@ -1,16 +1,14 @@
-require "opal"
 require "opal-d3"
 require "data/man_vs_horse"
 
 svg = D3.select("#visualization")
-        .append("svg")
-        .attr("height", "1200px")
-        .attr("width", "100%")
+  .append("svg")
+  .attr("height", "1200px")
+  .attr("width", "100%")
 width = svg.style("width").to_i
 
-max_time = ManVsHorse.flat_map{|d| [d.horse_time, d.human_time]}.max
-min_year = ManVsHorse.map(&:year).min
-max_year = ManVsHorse.map(&:year).max
+max_time = ManVsHorse.flat_map{|d| [d.horse_time_min, d.human_time_min]}.max
+min_year, max_year = ManVsHorse.map(&:year).minmax
 
 x = D3.scale_linear.domain([0, max_time]).range([0,width-90]).nice
 y = D3.scale_linear.domain([min_year, max_year+1]).range([0, 1160])
@@ -25,9 +23,11 @@ graph_area.append("g")
   .append("rect")
     .attr("x"){|d| 0 }
     .attr("y"){|d| y.(d.year) }
-    .attr("width"){|d| x.(d.horse_time) }
+    .attr("width"){|d| x.(d.horse_time_min) }
     .attr("height"){|d,i| 0.35 * (y.(i+1) - y.(i)) }
     .attr("fill"){|d| c.("horse") }
+    .append("title")
+      .text{|d| "🐎 #{d.rider} on #{d.horse} - #{d.horse_time}" }
 
 graph_area.append("g")
   .select_all("rect")
@@ -35,9 +35,11 @@ graph_area.append("g")
   .append("rect")
     .attr("x"){|d| 0 }
     .attr("y"){|d| y.(d.year+0.45) }
-    .attr("width"){|d| x.(d.human_time) }
+    .attr("width"){|d| x.(d.human_time_min) }
     .attr("height"){|d,i| 0.35 * (y.(i+1) - y.(i)) }
     .attr("fill"){|d| c.("man") }
+    .append("title")
+      .text{|d| "🏃 #{d.human} - #{d.human_time}" }
 
 svg.append("g")
   .attr("transform", "translate(0, 20)")

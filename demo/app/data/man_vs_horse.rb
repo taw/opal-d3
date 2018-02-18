@@ -1,6 +1,7 @@
 require "ostruct"
 
 ManVsHorse = [
+  [2017, "Horse", "Iola Evans", "Rheidol Petra", "2:23:03", "Owen Beilby", "2:50:21"],
   [2016, "Horse", "Lindsey Walters", "Deliva Crianza", "2:17:58", "Ross MacDonald", "2:37:51"],
   [2015, "Horse", "Geoffrey Allen", "Leo", "2:20:46", "Hugh Aggleton", "2:30:35"],
   [2014, "Horse", "Geoffrey Allen", "Leo", "2:22:53", "Jonathan Albon", "2:42:49"],
@@ -40,16 +41,18 @@ ManVsHorse = [
   [1980, "Horse", "Glyn Jones", "Solomon", "1:27", "Dic Evans", "2:10"],
 ].map{|y,w,rn,hn,ht,mn,mt|
   h,m,s = ht.split(":").map(&:to_i)
-  ht = h*60+m+(s||0)
+  htm = h*60 + m # +(s||0)
   h,m,s = mt.split(":").map(&:to_i)
-  mt = h*60+m+(s||0)
+  mtm = h*60 + m # +(s||0)
   OpenStruct.new(
     year: y,
     winner: w,
     rider: rn,
     horse: hn,
     horse_time: ht,
+    horse_time_min: htm,
     human: mn,
     human_time: mt,
+    human_time_min: mtm,
   )
 }
