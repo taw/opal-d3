@@ -1,0 +1,23 @@
+svg {
+  height: 400px;
+  width: 100%;
+}
+.greater {
+  fill: pink;
+}
+.inner {
+  fill: steelblue;
+}
+.greater:hover, .inner:hover {
+  stroke-width: 1px;
+  stroke: black;
+}
+#legend .greater {
+  background-color: pink;
+}
+#legend .inner {
+  background-color: steelblue;
+}
+#legend td {
+  padding: 0.5em;
+}
