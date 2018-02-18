@@ -1,11 +1,10 @@
-require "opal"
 require "opal-d3"
 require "data/harry_potter"
 
 svg = D3.select("#visualization")
-        .append("svg")
-        .attr("height", "400px")
-        .attr("width", "100%")
+  .append("svg")
+  .attr("height", "400px")
+  .attr("width", "100%")
 width = svg.style("width").to_i
 
 bar_size = (400-40-20) / (HarryPotterBooks.size)
@@ -21,6 +20,8 @@ HarryPotterBooks.each do |book|
     .attr("font-size", s.(book.pages))
     .text("📖")
     .attr("text-anchor", "middle")
+    .append("title")
+      .text("#{book.pages} pages")
   svg.append("text")
     .attr("x", 0)
     .attr("y", y.(book.title) + bar_size/2)
