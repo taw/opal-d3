@@ -1,11 +1,10 @@
-require "opal"
 require "opal-d3"
 require "data/mtg_modern_creatures"
 
 svg = D3.select("#visualization")
-        .append("svg")
-        .attr("height", "600px")
-        .attr("width", "600px")
+  .append("svg")
+  .attr("height", "600px")
+  .attr("width", "600px")
 
 # Use one scale not two so it's a square
 min, max = MtgModernCreatures.flat_map{|c| [c.power, c.toughness]}.minmax

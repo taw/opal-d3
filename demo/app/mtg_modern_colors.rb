@@ -1,4 +1,3 @@
-require "opal"
 require "opal-d3"
 require "data/mtg_modern_colors"
 
@@ -40,10 +39,15 @@ MtgModernColors.group_by(&:cmc).sort.each do |cmc, cards|
       m: "yellow",
     }[arc_data[:data].color]
 
+    count = arc_data[:data].count
+    label = "#{count} #{(count == 1) ? 'card' : 'cards'}"
+
     graph_area.append("path")
       .attr("d", arc.())
       .attr("fill", color)
       .attr("stroke", "black")
       .attr("stroke-width", "1px")
+      .append("title")
+        .text(label)
   end
 end
