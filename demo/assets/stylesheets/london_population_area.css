@@ -1,0 +1,13 @@
+svg {
+  height: 500px;
+  width: 100%;
+}
+#legend .greater {
+  background-color: pink;
+}
+#legend .inner {
+  background-color: steelblue;
+}
+#legend td {
+  padding: 0.5em;
+}

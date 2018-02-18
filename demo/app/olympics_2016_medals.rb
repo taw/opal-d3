@@ -3,9 +3,9 @@ require "data/olympics_2016_medals"
 
 height = Olympics2016Medals.size * 24
 svg = D3.select("#visualization")
-        .append("svg")
-        .attr("height", "#{height}px")
-        .attr("width", "100%")
+  .append("svg")
+  .attr("height", "#{height}px")
+  .attr("width", "100%")
 
 width = svg.style("width").to_i
 max_medals = Olympics2016Medals.map(&:total).max

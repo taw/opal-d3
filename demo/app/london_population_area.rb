@@ -1,10 +1,7 @@
 require "opal-d3"
 require "data/london_population"
 
-svg = D3.select("#visualization")
-  .append("svg")
-  .attr("height", "500px")
-  .attr("width", "100%")
+svg = D3.select("#visualization").append("svg")
 width = svg.style("width").to_i
 
 x = D3.scale_linear.domain([1801, 2011]).range([0, width-60])
@@ -37,14 +34,6 @@ graph_area.call(axis_left)
 axis_bottom = D3.axis_bottom(x).tick_format(D3.format("d"))
 graph_area.append("g").attr("transform", "translate(0, 400)").call(axis_bottom)
 
-list = D3.select("#visualization").append("table")
-list.append("tr")
-  .append("td")
-  .style("background", "pink")
-  .style("padding", "1em")
-  .text("Outer London")
-list.append("tr")
-  .append("td")
-  .style("background", "steelblue")
-  .style("padding", "1em")
-  .text("Inner London")
+legend = D3.select("#visualization").append("div").attr("id", "legend")
+legend.append("tr").append("td").attr("class", "greater").text("Outer London")
+legend.append("tr").append("td").attr("class", "inner").text("Inner London")
