@@ -24,6 +24,7 @@ visualizations = {
   mtg_modern_creatures: "MTG: Creatures in Modern",
   mtg_modern_colors: "MTG: Spell Cards in Modern",
   star_trek_voyager: "Star Trek: Voyager",
+  us_gdp: "US GDP",
 }
 
 visualizations.each do |script, title|

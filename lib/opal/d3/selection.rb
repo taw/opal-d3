@@ -131,6 +131,16 @@ module D3
         self
       end
     end
+
+    # This is not tested, and events are not wrapped in any nice way
+    def on(name, &callback)
+      if callback
+        @native.JS.on(name, callback)
+        self
+      else
+        @native.JS.on(name)
+      end
+    end
   end
 
   class << self

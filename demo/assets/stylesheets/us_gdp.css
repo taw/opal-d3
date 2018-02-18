@@ -1,0 +1,22 @@
+svg {
+  height: 500px;
+  width: 100%;
+  background-color: #ddd;
+}
+#x-axis {
+  transform: translate(0px, 450px);
+}
+#y-axis {
+  transform: translate(50px, 0px);
+}
+rect:hover {
+  fill: red;
+}
+#tooltip {
+  position: absolute;
+  text-align: center;
+  background-color: #ccf;
+  width: 100px;
+  height: 52px;
+  pointer-events: none;
+}
