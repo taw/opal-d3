@@ -20,12 +20,12 @@ code_path = "#{__dir__}/../app/#{script}.rb"
     <div id="visualization"></div>
     <div id="code">
       <h1>Code</h1>
-      <pre><code><%= open(code_path).read%></code></pre>
+      <pre><code><%= open(code_path).read.gsub("<", "&lt;") %></code></pre>
     </div>
     <% if File.exist?(stylesheet_path) %>
       <div id="style">
         <h1>Stylesheet</h1>
-        <pre><code><%= open(stylesheet_path).read%></code></pre>
+        <pre><code><%= open(stylesheet_path).read.gsub("<", "&lt;") %></code></pre>
       </div>
     <% end %>
     <script src="../assets/d3.js"></script>

@@ -65,4 +65,8 @@ D3.json(url) do |error, response|
         tooltip
           .style("display", "none")
       }
+
+  legend = visualization.append("div").attr("id", "legend")
+  legend.append("div").text("Red - doping suspicions")
+  legend.append("div").text("Blue - no doping suspicions")
 end

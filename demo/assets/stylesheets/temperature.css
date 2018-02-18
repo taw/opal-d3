@@ -1,0 +1,19 @@
+#visualization {
+  position: relative;
+}
+#title {
+  text-anchor: middle;
+  font-size: 32px;
+}
+svg {
+  height: 700px;
+  width: 100%;
+  background-color: #f0f0f0;
+}
+#tooltip {
+  position: absolute;
+  display: none;
+  background-color: white;
+  opacity: 0.5;
+  text-align: center;
+}

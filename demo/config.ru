@@ -26,6 +26,7 @@ visualizations = {
   star_trek_voyager: "Star Trek: Voyager",
   us_gdp: "US GDP",
   cycling: "Doping in Professional Bicycle Racing",
+  temperature: "Historical Temperature Record",
 }
 
 visualizations.each do |script, title|
