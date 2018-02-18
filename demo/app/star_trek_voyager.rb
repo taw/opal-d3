@@ -1,11 +1,10 @@
-require "opal"
 require "opal-d3"
 require "data/star_trek_voyager"
 
 svg = D3.select("#visualization")
-        .append("svg")
-        .attr("height", "600px")
-        .attr("width", "100%")
+  .append("svg")
+  .attr("height", "600px")
+  .attr("width", "100%")
 width = svg.style("width").to_i
 
 x = D3.scale_linear.domain([0, StarTrekVoyager.size-1]).range([40, width-20])
@@ -32,6 +31,8 @@ StarTrekVoyager.each do |episode|
     .attr("r", 4)
     .attr("fill", c.(episode.season))
     .attr("opacity", 0.6)
+    .append("title")
+      .text("S%02dE%02d %s" % [episode.season, episode.number, episode.title])
 end
 
 axis = D3.axis_left(y)
