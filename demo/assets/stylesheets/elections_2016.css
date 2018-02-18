@@ -1,0 +1,11 @@
+.results li {
+  position: realtive;
+}
+.vote-bar {
+  opacity: 0.5;
+  position: absolute;
+  height: 100%;
+}
+.vote-description {
+  position: absolute;
+}
