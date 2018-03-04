@@ -19,22 +19,20 @@ module D3
       # obj.foo(1).bar(2)
       def attribute_d3(ruby_name=nil, js_name)
         ruby_name ||= js_name.underscore
-        eval <<-EOF
-          def #{ruby_name}(new_value=`undefined`)
-            if `new_value !== undefined`
-              new_value = `null` if new_value == nil
-              @native.JS.#{js_name}(new_value)
-              self
-            else
-              value = @native.JS.#{js_name}
-              `value === null ? nil : value`
-            end
-          end
-          def #{ruby_name}=(new_value)
+        define_method(ruby_name) do |new_value=`undefined`|
+          if `new_value !== undefined`
             new_value = `null` if new_value == nil
-            @native.JS.#{js_name}(new_value)
+            `self["native"][#{js_name}](#{new_value})`
+            self
+          else
+            value = `self["native"][#{js_name}]()`
+            `value === null ? nil : value`
           end
-        EOF
+        end
+        define_method("#{ruby_name}=") do |new_value|
+          new_value = `null` if new_value == nil
+          `self["native"][#{js_name}](#{new_value})`
+        end
       end
 
       # This provides ruby style and jquery style interfaces,
@@ -44,44 +42,38 @@ module D3
       # obj.foo(1).bar(2).buzz{...}
       def attribute_d3_block(ruby_name=nil, js_name)
         ruby_name ||= js_name.underscore
-        eval <<-EOF
-          def #{ruby_name}(new_value=`undefined`, &block)
-            if block_given?
-              @native.JS.#{js_name}(block)
-              self
-            elsif `new_value !== undefined`
-              new_value = `null` if new_value == nil
-              @native.JS.#{js_name}(new_value)
-              self
-            else
-              value = @native.JS.#{js_name}
-              `value === null ? nil : value`
-            end
-          end
-          def #{ruby_name}=(new_value)
+        define_method(ruby_name) do |new_value=`undefined`, &block|
+          if block_given?
+            @native.JS[js_name].JS.apply(@native, `Opal.to_a(block)`)
+            self
+          elsif `new_value !== undefined`
             new_value = `null` if new_value == nil
-            @native.JS.#{js_name}(new_value)
+            `self["native"][#{js_name}](#{new_value})`
+            self
+          else
+            value = `self["native"][#{js_name}]()`
+            `value === null ? nil : value`
           end
-        EOF
+        end
+        define_method("#{ruby_name}=") do |new_value|
+          new_value = `null` if new_value == nil
+          `self["native"][#{js_name}](#{new_value})`
+        end
       end
 
       def alias_native_chainable(ruby_name=nil, js_name)
         ruby_name ||= js_name.underscore
-        eval <<-EOF
-          def #{ruby_name}(*args)
-            @native.JS.#{js_name}(*args)
-            self
-          end
-        EOF
+        define_method(ruby_name) do |*args|
+          @native.JS[js_name].JS.apply(@native, `Opal.to_a(args)`)
+          self
+        end
       end
 
       def alias_native_new(ruby_name=nil, js_name)
         ruby_name ||= js_name.underscore
-        eval <<-EOF
-          def #{ruby_name}(*args)
-            self.class.new @native.JS.#{js_name}(*args)
-          end
-        EOF
+        define_method(ruby_name) do |*args|
+          self.class.new( @native.JS[js_name].JS.apply(@native, `Opal.to_a(args)`) )
+        end
       end
     end
   end
