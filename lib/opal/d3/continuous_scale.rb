@@ -13,7 +13,7 @@ module D3
     alias_native_new :copy
     alias_native :ticks
     alias_native :tick_format, :tickFormat
-    alias_native_chainable :range_round, :rangeRound
+    alias_native_chainable :rangeRound
     def interpolate(&block)
       if block
         @native.JS.interpolate(block)

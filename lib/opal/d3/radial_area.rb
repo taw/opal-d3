@@ -8,11 +8,11 @@ module D3
     end
 
     attribute_d3_block :angle
-    attribute_d3_block :start_angle, :startAngle
-    attribute_d3_block :end_angle, :endAngle
+    attribute_d3_block :startAngle
+    attribute_d3_block :endAngle
     attribute_d3_block :radius
-    attribute_d3_block :inner_radius, :innerRadius
-    attribute_d3_block :outer_radius, :outerRadius
+    attribute_d3_block :innerRadius
+    attribute_d3_block :outerRadius
     attribute_d3_block :defined
 
     def curve(new_value=`undefined`)

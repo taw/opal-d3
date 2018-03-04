@@ -8,12 +8,12 @@ module D3
   end
 
   class << self
-    alias_d3 :time_format, :timeFormat
-    alias_d3 :time_parse, :timeParse
-    alias_d3 :utc_format, :utcFormat
-    alias_d3 :utc_parse, :utcParse
-    alias_d3 :iso_format, :isoFormat
-    alias_d3 :iso_parse, :isoParse
+    alias_d3 :timeFormat
+    alias_d3 :timeParse
+    alias_d3 :utcFormat
+    alias_d3 :utcParse
+    alias_d3 :isoFormat
+    alias_d3 :isoParse
 
     def time_format_locale(spec={})
       D3::TimeFormatLocale.new @d3.JS.timeFormatLocale(

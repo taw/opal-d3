@@ -40,10 +40,10 @@ module D3
     alias_native :find
     alias_native :size
     alias_native_chainable :add
-    alias_native_chainable :add_all, :addAll
+    alias_native_chainable :addAll
     alias_native_chainable :cover
     alias_native_chainable :remove
-    alias_native_chainable :remove_all, :removeAll
+    alias_native_chainable :removeAll
     alias_native_new :copy
     attribute_d3 :extent
 

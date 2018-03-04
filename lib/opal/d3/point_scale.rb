@@ -15,7 +15,7 @@ module D3
     attribute_d3 :align
     attribute_d3 :round
     # This requires argument, we might redo this not to
-    alias_native_chainable :range_round, :rangeRound
+    alias_native_chainable :rangeRound
   end
 
   class << self

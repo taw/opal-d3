@@ -13,12 +13,12 @@ module D3
     # this is really weirdo one, as it sets both paddings* but returns inner one
     # All need to be in [0,1] range
     attribute_d3 :padding
-    attribute_d3 :padding_inner, :paddingInner
-    attribute_d3 :padding_outer, :paddingOuter
+    attribute_d3 :paddingInner
+    attribute_d3 :paddingOuter
     attribute_d3 :align
     attribute_d3 :round
     # This requires argument, we might redo this not to
-    alias_native_chainable :range_round, :rangeRound
+    alias_native_chainable :rangeRound
   end
 
   class << self

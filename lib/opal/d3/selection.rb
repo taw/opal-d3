@@ -49,7 +49,7 @@ module D3
 
     alias_native_new :remove
     alias_native_new :select
-    alias_native_new :select_all, :selectAll
+    alias_native_new :selectAll
     alias_native_new :enter
     alias_native_new :exit
     alias_native :call

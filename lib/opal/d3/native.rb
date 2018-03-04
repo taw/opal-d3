@@ -17,7 +17,8 @@ module D3
       # obj.foo
       # obj.foo = 1; obj.bar = 2
       # obj.foo(1).bar(2)
-      def attribute_d3(ruby_name, js_name=ruby_name)
+      def attribute_d3(ruby_name=nil, js_name)
+        ruby_name ||= js_name.underscore
         eval <<-EOF
           def #{ruby_name}(new_value=`undefined`)
             if `new_value !== undefined`
@@ -41,7 +42,8 @@ module D3
       # obj.foo
       # obj.foo = 1; obj.bar = 2
       # obj.foo(1).bar(2).buzz{...}
-      def attribute_d3_block(ruby_name, js_name=ruby_name)
+      def attribute_d3_block(ruby_name=nil, js_name)
+        ruby_name ||= js_name.underscore
         eval <<-EOF
           def #{ruby_name}(new_value=`undefined`, &block)
             if block_given?
@@ -63,7 +65,8 @@ module D3
         EOF
       end
 
-      def alias_native_chainable(ruby_name, js_name=ruby_name)
+      def alias_native_chainable(ruby_name=nil, js_name)
+        ruby_name ||= js_name.underscore
         eval <<-EOF
           def #{ruby_name}(*args)
             @native.JS.#{js_name}(*args)
@@ -72,7 +75,8 @@ module D3
         EOF
       end
 
-      def alias_native_new(ruby_name, js_name=ruby_name)
+      def alias_native_new(ruby_name=nil, js_name)
+        ruby_name ||= js_name.underscore
         eval <<-EOF
           def #{ruby_name}(*args)
             self.class.new @native.JS.#{js_name}(*args)

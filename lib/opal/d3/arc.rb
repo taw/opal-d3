@@ -5,11 +5,11 @@ module D3
       @native.call(*args)
     end
 
-    attribute_d3_block :inner_radius, :innerRadius
-    attribute_d3_block :outer_radius, :outerRadius
-    attribute_d3_block :corner_radius, :cornerRadius
-    attribute_d3_block :start_angle, :startAngle
-    attribute_d3_block :end_angle, :endAngle
+    attribute_d3_block :innerRadius
+    attribute_d3_block :outerRadius
+    attribute_d3_block :cornerRadius
+    attribute_d3_block :startAngle
+    attribute_d3_block :endAngle
     alias_native :centroid
   end
 

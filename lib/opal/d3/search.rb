@@ -10,8 +10,8 @@ module D3
     alias_d3 :ascending
     alias_d3 :descending
     alias_d3 :bisect
-    alias_d3 :bisect_left, :bisectLeft
-    alias_d3 :bisect_right, :bisectRight
+    alias_d3 :bisectLeft
+    alias_d3 :bisectRight
 
     def scan(array, &block)
       if block_given?

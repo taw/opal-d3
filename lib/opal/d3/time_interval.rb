@@ -47,35 +47,35 @@ module D3
     def time_millisecond; D3::TimeInterval.new(`window.d3.timeMillisecond`); end
     def utc_millisecond; D3::TimeInterval.new(`window.d3.utcMillisecond`); end
 
-    alias_d3 :time_years, :timeYears
-    alias_d3 :utc_years, :utcYears
-    alias_d3 :time_milliseconds, :timeMilliseconds
-    alias_d3 :utc_milliseconds, :utcMilliseconds
-    alias_d3 :time_seconds, :timeSeconds
-    alias_d3 :utc_seconds, :utcSeconds
-    alias_d3 :time_minutes, :timeMinutes
-    alias_d3 :utc_minutes, :utcMinutes
-    alias_d3 :time_hours, :timeHours
-    alias_d3 :utc_hours, :utcHours
-    alias_d3 :time_days, :timeDays
-    alias_d3 :utc_days, :utcDays
-    alias_d3 :time_weeks, :timeWeeks
-    alias_d3 :utc_weeks, :utcWeeks
-    alias_d3 :time_sundays, :timeSundays
-    alias_d3 :utc_sundays, :utcSundays
-    alias_d3 :time_mondays, :timeMondays
-    alias_d3 :utc_mondays, :utcMondays
-    alias_d3 :time_tuesdays, :timeTuesdays
-    alias_d3 :utc_tuesdays, :utcTuesdays
-    alias_d3 :time_wednesdays, :timeWednesdays
-    alias_d3 :utc_wednesdays, :utcWednesdays
-    alias_d3 :time_thursdays, :timeThursdays
-    alias_d3 :utc_thursdays, :utcThursdays
-    alias_d3 :time_fridays, :timeFridays
-    alias_d3 :utc_fridays, :utcFridays
-    alias_d3 :time_saturdays, :timeSaturdays
-    alias_d3 :utc_saturdays, :utcSaturdays
-    alias_d3 :time_months, :timeMonths
-    alias_d3 :utc_months, :utcMonths
+    alias_d3 :timeYears
+    alias_d3 :utcYears
+    alias_d3 :timeMilliseconds
+    alias_d3 :utcMilliseconds
+    alias_d3 :timeSeconds
+    alias_d3 :utcSeconds
+    alias_d3 :timeMinutes
+    alias_d3 :utcMinutes
+    alias_d3 :timeHours
+    alias_d3 :utcHours
+    alias_d3 :timeDays
+    alias_d3 :utcDays
+    alias_d3 :timeWeeks
+    alias_d3 :utcWeeks
+    alias_d3 :timeSundays
+    alias_d3 :utcSundays
+    alias_d3 :timeMondays
+    alias_d3 :utcMondays
+    alias_d3 :timeTuesdays
+    alias_d3 :utcTuesdays
+    alias_d3 :timeWednesdays
+    alias_d3 :utcWednesdays
+    alias_d3 :timeThursdays
+    alias_d3 :utcThursdays
+    alias_d3 :timeFridays
+    alias_d3 :utcFridays
+    alias_d3 :timeSaturdays
+    alias_d3 :utcSaturdays
+    alias_d3 :timeMonths
+    alias_d3 :utcMonths
   end
 end

@@ -10,11 +10,11 @@ module D3
       @native = native
     end
 
-    attribute_d3 :tick_size_inner, :tickSizeInner
-    attribute_d3 :tick_size_outer, :tickSizeOuter
-    attribute_d3 :tick_size, :tickSize
-    attribute_d3 :tick_padding, :tickPadding
-    attribute_d3 :tick_arguments, :tickArguments
+    attribute_d3 :tickSizeInner
+    attribute_d3 :tickSizeOuter
+    attribute_d3 :tickSize
+    attribute_d3 :tickPadding
+    attribute_d3 :tickArguments
     alias_native_chainable :ticks
 
     def call(context)
