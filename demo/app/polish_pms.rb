@@ -12,7 +12,7 @@ max_date = PolishPMs.map(&:end).max
 
 x = D3.scale_linear.domain([min_date, max_date]).range([100, width-90])
 y = D3.scale_linear.domain([0, PolishPMs.size+1]).range([0, 580])
-c = D3.scale_ordinal.range(D3.scheme_category_20)
+c = D3.scale_ordinal.range(D3.scheme_category_10)
 
 graph_area = svg.append("g")
   .attr("transform", "translate(60, 20)")
